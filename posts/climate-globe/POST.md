@@ -24,6 +24,8 @@ dividers: false
 
 ## Purpose
 
+::: spacer
+
 This visualization answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5°C?
 
 The 1.5°C figure comes from the Paris Agreement, where countries agreed to try to hold global warming to 1.5°C above the pre-industrial level. That target is a global average over decades. But warming is not spread evenly. Land warms faster than oceans, the Arctic warms faster than the tropics, and a single month can run hot in one region and cold in another. A global average hides all of that.
@@ -33,6 +35,8 @@ The globe above shows the local picture. Every point on Earth is colored by how 
 Pick a month, then press play. The globe runs through every year of that month since 1880, so you can watch the warm areas grow, shrink, and grow again over 147 years.
 
 ## Using the globe
+
+::: spacer
 
 Drag to spin it. Hover for the value at any point. The chart under the numbers tracks the two shares across every year of the chosen month.
 
@@ -60,9 +64,13 @@ The chart under the globe makes the swing visible. In the 1880s and 1890s, befor
 
 ## What this page is
 
+::: spacer
+
 Every chart we publish should be something you can check, question, and rebuild yourself. This page documents how we built the globe: where the data comes from, every transformation we applied, and the judgment calls we made along the way. Nothing here is proprietary. The code and the built files are in a public repository, linked at the end.
 
 ## The data sources
+
+::: spacer
 
 Three public datasets go into the globe. We do not alter any of the underlying figures. Our work is moving the baseline, adding up land and people, and drawing the globe.
 
@@ -73,6 +81,8 @@ Three public datasets go into the globe. We do not alter any of the underlying f
 **Coastlines, borders, and land: Natural Earth.** The coastline, country border, and land outline files at Natural Earth's coarsest level of detail, meant for whole-world maps. They are in the public domain.
 
 ## How we built it
+
+::: spacer
 
 ### Step 1: Start with what NASA already gives you
 
@@ -132,9 +142,13 @@ Each calendar month's 147 years of maps ship as one compressed file of under a m
 
 ## Updating
 
+::: spacer
+
 NASA publishes the previous month's data around the middle of each month. Updating the globe is three commands: fetch the new NASA file, recompute the baselines and shares, and rebuild the page. Every number on the globe and on this page comes from that pipeline, with nothing typed in by hand. We plan to refresh it monthly.
 
 ## Honest notes and limitations
+
+::: spacer
 
 We would rather tell you the edges of this than have you find them.
 
@@ -158,9 +172,13 @@ We would rather tell you the edges of this than have you find them.
 
 ## Reproduce it yourself
 
+::: spacer
+
 The code, the build steps, and the published files are at [github.com/Data4ThePeople/ClimateGlobe](https://github.com/Data4ThePeople/ClimateGlobe). You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the eight steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.
 
 ## Common questions
+
+::: spacer
 
 ### What does 1.5°C above pre-industrial mean?
 

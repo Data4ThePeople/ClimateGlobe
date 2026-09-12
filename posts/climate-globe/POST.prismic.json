@@ -49,7 +49,28 @@
             "text": "Purpose",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "This visualization answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5\u00b0C?",
@@ -100,7 +121,28 @@
             "text": "Using the globe",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "Drag to spin it. Hover for the value at any point. The chart under the numbers tracks the two shares across every year of the chosen month.",
@@ -300,7 +342,28 @@
             "text": "What this page is",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "Every chart we publish should be something you can check, question, and rebuild yourself. This page documents how we built the globe: where the data comes from, every transformation we applied, and the judgment calls we made along the way. Nothing here is proprietary. The code and the built files are in a public repository, linked at the end.",
@@ -333,7 +396,28 @@
             "text": "The data sources",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "Three public datasets go into the globe. We do not alter any of the underlying figures. Our work is moving the baseline, adding up land and people, and drawing the globe.",
@@ -765,7 +849,28 @@
             "text": "Updating",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "NASA publishes the previous month's data around the middle of each month. Updating the globe is three commands: fetch the new NASA file, recompute the baselines and shares, and rebuild the page. Every number on the globe and on this page comes from that pipeline, with nothing typed in by hand. We plan to refresh it monthly.",
@@ -798,7 +903,28 @@
             "text": "Honest notes and limitations",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "We would rather tell you the edges of this than have you find them.",
@@ -939,7 +1065,28 @@
             "text": "Reproduce it yourself",
             "spans": [],
             "direction": "ltr"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "slice_type": "spacer",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "spacer_value": "20px"
+      }
+    },
+    {
+      "slice_type": "paragarph_text",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {
+        "paragraph_text": [
           {
             "type": "paragraph",
             "text": "The code, the build steps, and the published files are at github.com/Data4ThePeople/ClimateGlobe. You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the eight steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.",
