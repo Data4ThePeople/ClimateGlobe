@@ -13,12 +13,14 @@ schema_type: dataset
 drop_cap: false
 heading_spacer: 20px
 caption_spacer: 20px
-dividers: true
+dividers: false
 ---
 
 # Interactive Globe: How Much Warmer Is Each Part of the World Than 1880-1900?
 
 <iframe src="https://data4thepeople.github.io/ClimateGlobe/dist/index.html#embed=1" width="100%" height="780" loading="lazy" style="border:0" title="Interactive globe: how much warmer than 1880-1900"></iframe>
+
+::: spacer 40px
 
 ## Purpose
 
@@ -29,6 +31,8 @@ The 1.5°C figure comes from the Paris Agreement, where countries agreed to try 
 The globe above shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900, the earliest period in NASA's record and the period NASA uses to stand in for "pre-industrial." Two of the numbers beside the globe sum it up: the share of the world's land area that was more than 1.5°C above its baseline, and the share of today's population living in those places.
 
 Pick a month, then press play. The globe runs through every year of that month since 1880, so you can watch the warm areas grow, shrink, and grow again over 147 years.
+
+::: divider
 
 ## Using the globe
 
@@ -56,9 +60,13 @@ Those are single-month readings, and single months swing. The 10-year average of
 
 The chart under the globe makes the swing visible. In the 1880s and 1890s, before there was any trend to speak of, a warm winter over Siberia or Canada could put 20% or 30% of land above 1.5°C for a single January. What has changed is not that hot months exist. It is that the floor has risen until most months, in most places, sit above the line.
 
+::: divider
+
 ## What this page is
 
 Every chart we publish should be something you can check, question, and rebuild yourself. This page documents how we built the globe: where the data comes from, every transformation we applied, and the judgment calls we made along the way. Nothing here is proprietary. The code and the built files are in a public repository, linked at the end.
+
+::: divider
 
 ## The data sources
 
@@ -69,6 +77,8 @@ Three public datasets go into the globe. We do not alter any of the underlying f
 **Population: GHS-POP 2025.** The European Commission's Joint Research Centre publishes the Global Human Settlement Layer, a population grid built from census data and satellite imagery. We use the 2025 estimate, which counts people in squares about one kilometer on a side. It sums to 8.19 billion people.
 
 **Coastlines, borders, and land: Natural Earth.** The coastline, country border, and land outline files at Natural Earth's coarsest level of detail, meant for whole-world maps. They are in the public domain.
+
+::: divider
 
 ## How we built it
 
@@ -128,9 +138,13 @@ The globe is drawn by your device's graphics chip, using code we wrote rather th
 
 Each calendar month's 147 years of maps ship as one compressed file of under a megabyte. August is built into the page. The other eleven months download the first time you select them.
 
+::: divider
+
 ## Updating
 
 NASA publishes the previous month's data around the middle of each month. Updating the globe is three commands: fetch the new NASA file, recompute the baselines and shares, and rebuild the page. Every number on the globe and on this page comes from that pipeline, with nothing typed in by hand. We plan to refresh it monthly.
+
+::: divider
 
 ## Honest notes and limitations
 
@@ -154,9 +168,13 @@ We would rather tell you the edges of this than have you find them.
 
 **We did not invent the data.** Every temperature change is NASA's and every population count is the Joint Research Centre's. Our contribution is the shift of the baseline to 1880-1900, the land and population sums, the 10-year average, the color scale, and the interactivity.
 
+::: divider
+
 ## Reproduce it yourself
 
 The code, the build steps, and the published files are at [github.com/Data4ThePeople/ClimateGlobe](https://github.com/Data4ThePeople/ClimateGlobe). You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the eight steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.
+
+::: divider
 
 ## Common questions
 
