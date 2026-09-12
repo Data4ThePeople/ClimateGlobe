@@ -5,8 +5,8 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 
 ## Current
 
-Post: none yet
-Step: 1
+Post: climate-globe
+Step: 2a
 Since: 2026-09-12
 
 ## Steps
@@ -31,3 +31,4 @@ None.
 - 2026-09-12 Step 1 opened. Topic: spinning 3D globe of monthly temperature anomaly vs. the 1880-1900 preindustrial baseline (NASA GISTEMP v4), with share of land and of population above 1.5°C, month-of-year playback 1880-2026.
 - 2026-09-12 Globe built (GISTEMP v4 through Aug 2026, GHS-POP 2025), pipeline in src/climateglobe, live on GitHub Pages.
 - 2026-09-12 Step 1 confirmed by Eric. Next: 2a, waiting for the slug and draft.
+- 2026-09-12 Step 2a opened, slug climate-globe. Waiting for Eric's draft.
