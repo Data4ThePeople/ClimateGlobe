@@ -6,10 +6,24 @@ date: 2026-09-12
 section: Visualization
 hero: images/climate-globe-hero-1680x1080.png
 hero_alt: A 3D globe centered on the Atlantic Ocean, colored by how much warmer August 2026 was than the same month in 1880-1900. Nearly the whole surface is red; the darkest reds cover Europe, North Africa, the Middle East, and the Arctic. Beside it: +1.60°C global average, 77% of land area and 73% of today's population above 1.5°C. Built by Data 4 The People from NASA GISTEMP data.
-meta_title: Global Warming Map: Temperature vs. 1880-1900, by Month
-description: Interactive 3D globe of monthly temperature change since 1880, with the share of land and people above 1.5°C. NASA GISTEMP data, fully documented.
-keywords: global temperature anomaly map, 1.5 degrees Celsius, pre-industrial baseline, NASA GISTEMP, climate change map, interactive globe, August 2026 temperature, global warming by region
+meta_title: Global Warming Map: Temperature Change Since 1880, by Month
+description: Interactive map of global warming: spin the globe to see the temperature change in every part of the world since 1880 and where it has passed 1.5°C. NASA data.
+keywords: global warming map, map of climate change, temperature change since 1880, climate change facts, 1.5 degrees Celsius, pre-industrial baseline, NASA GISTEMP, interactive globe
 schema_type: dataset
+dataset_name: Monthly temperature change vs. 1880-1900 for every 2° grid cell on Earth, 1880-2026
+dataset_description: Monthly surface temperature anomaly for every 2°x2° cell on Earth relative to that cell's own 1880-1900 average for the same calendar month, January 1880 through August 2026, with the share of land area and of 2025 population above 1.5°C. Built from NASA GISTEMP v4, GHS-POP 2025 and Natural Earth.
+temporal: 1880-01/2026-08
+spatial: World
+measured: Surface temperature anomaly vs. 1880-1900|degrees Celsius; Share of land area above 1.5°C|percent; Share of population above 1.5°C|percent
+sources: https://data.giss.nasa.gov/gistemp/|https://human-settlement.emergency.copernicus.eu/ghs_pop.php|https://www.naturalearthdata.com/
+distribution: text/html|https://data4thepeople.github.io/ClimateGlobe/dist/index.html;application/gzip|https://github.com/Data4ThePeople/ClimateGlobe/tree/main/dist/data
+measurement_technique: NASA GISTEMP v4 gridded anomalies rebased per cell to the 1880-1900 mean of the same calendar month; land share area-weighted from Natural Earth land polygons; population summed from GHS-POP 2025
+credit: Data 4 The People, from NASA GISS and the European Commission Joint Research Centre
+license: https://www.data4thepeople.com/terms-of-use
+app_url: https://data4thepeople.github.io/ClimateGlobe/dist/index.html
+app_name: Interactive globe: how much warmer than 1880-1900
+app_description: Free interactive 3D globe of monthly temperature change since 1880 against the 1880-1900 baseline, with the share of land and people above 1.5°C.
+app_features: Spin the globe|Pick any month and play every year since 1880|Highlight only areas above 1.5°C|10-year average toggle|Share of land area and of population above 1.5°C|Hover for the value at any point
 drop_cap: false
 heading_spacer: 20px
 caption_spacer: 20px
