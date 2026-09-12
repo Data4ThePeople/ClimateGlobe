@@ -106,7 +106,13 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
 .toggles .check input { accent-color: var(--hot); margin: 0; }
 
 /* --- main ----------------------------------------------------------------- */
-.main { display: grid; grid-template-columns: minmax(280px, 480px) minmax(280px, 1fr); gap: 22px; align-items: start; }
+.main {
+  display: grid; grid-template-columns: minmax(280px, 480px) minmax(280px, 1fr);
+  grid-template-rows: auto auto; gap: 10px 22px; align-items: start;
+}
+.globe-wrap { grid-column: 1; grid-row: 1 / 3; }
+.panel { grid-column: 2; grid-row: 1; }
+.below { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .globe-wrap { position: relative; width: 100%; aspect-ratio: 1; max-width: 100%; }
 #globe { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; border-radius: 50%; }
 #globe.dragging { cursor: grabbing; }
@@ -170,8 +176,9 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
   header.masthead { flex-direction: column; align-items: flex-start; gap: 10px; }
   header.masthead h1 { font-size: 20px; }
   .brand { height: 34px; }
-  .main { grid-template-columns: 1fr; }
-  .globe-wrap { max-width: 420px; margin: 0 auto; }
+  .main { grid-template-columns: 1fr; grid-template-rows: none; }
+  .globe-wrap { grid-column: 1; grid-row: auto; max-width: 420px; margin: 0 auto; }
+  .panel, .below { grid-column: 1; grid-row: auto; }
   .footer-row { flex-direction: column; align-items: flex-start; }
 }
 @container page (max-width: 420px) {
@@ -190,3 +197,25 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
 .embed .when { font-size: 19px; }
 .embed .stat .num { font-size: 26px; }
 .embed #chart { height: 170px; }
+
+/* Phone width inside the 780px frame: globe and headline stats side by side,
+   legend and chart full width underneath, so nothing scrolls inside the iframe.
+   Declared last so it beats the wide embed rule above. */
+@container page (max-width: 640px) {
+  .embed .controls { grid-template-columns: 1fr 1fr; grid-auto-flow: dense; gap: 6px 10px; }
+  .embed .footer-brand .built { display: none; }
+  .embed .field.year { grid-column: 1 / -1; }
+  .embed .field.toggles { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 4px 14px; }
+  .embed .field.toggles > label:first-child { display: none; }
+  .embed .main { grid-template-columns: minmax(150px, 46%) minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px 12px; }
+  .embed .globe-wrap { grid-column: 1; grid-row: 1; max-width: none; margin: 0; }
+  .embed .panel { grid-column: 2; grid-row: 1; gap: 6px; }
+  .embed .below { grid-column: 1 / -1; grid-row: 2; gap: 8px; }
+  .embed .when { font-size: 16px; }
+  .embed .stat .num { font-size: 22px; }
+  .embed .stat .cap { font-size: 11px; }
+  .embed .stat2 { grid-template-columns: 1fr; gap: 6px; }
+  .embed .note { font-size: 10.5px; }
+  .embed #chart { height: 120px; }
+  .embed .footer-row { margin-top: 4px; }
+}
