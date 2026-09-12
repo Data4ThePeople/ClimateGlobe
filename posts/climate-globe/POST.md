@@ -191,6 +191,8 @@ We would rather tell you the edges of this than have you find them.
 
 The code, the build steps, and the published files are at [github.com/Data4ThePeople/ClimateGlobe](https://github.com/Data4ThePeople/ClimateGlobe). You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the eight steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.
 
+::: divider
+
 ## Common questions
 
 ::: spacer
