@@ -18,13 +18,21 @@
         "html_content": [
           {
             "type": "preformatted",
-            "text": "<iframe src=\"https://data4thepeople.github.io/ClimateGlobe/dist/index.html#embed=1\" width=\"100%\" height=\"780\" loading=\"lazy\" style=\"border:0\" title=\"Interactive globe: how much warmer than 1880-1900\"></iframe>## Purpose",
+            "text": "<iframe src=\"https://data4thepeople.github.io/ClimateGlobe/dist/index.html#embed=1\" width=\"100%\" height=\"780\" loading=\"lazy\" style=\"border:0\" title=\"Interactive globe: how much warmer than 1880-1900\"></iframe>",
             "spans": [],
             "direction": "ltr"
           }
         ],
         "embed_height": "780px"
       }
+    },
+    {
+      "slice_type": "divider_dots",
+      "slice_label": null,
+      "variation": "default",
+      "version": "initial",
+      "items": [],
+      "primary": {}
     },
     {
       "slice_type": "paragarph_text",
@@ -34,6 +42,12 @@
       "items": [],
       "primary": {
         "paragraph_text": [
+          {
+            "type": "heading2",
+            "text": "Purpose",
+            "spans": [],
+            "direction": "ltr"
+          },
           {
             "type": "paragraph",
             "text": "This visualization answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5\u00b0C?",
