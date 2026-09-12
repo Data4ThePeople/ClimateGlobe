@@ -13,7 +13,7 @@ Since: 2026-09-12
 
 | Step | What | Confirmed | Notes |
 |---|---|---|---|
-| 1  | Exploration and analysis | | |
+| 1  | Exploration and analysis | 2026-09-12 | Globe live on GitHub Pages; tie-out done |
 | 2a | Draft with brackets resolved | | |
 | 2b | Eric's edit, Claude's look-over | | |
 | 2c | Slice markup | | |
@@ -30,3 +30,4 @@ None.
 
 - 2026-09-12 Step 1 opened. Topic: spinning 3D globe of monthly temperature anomaly vs. the 1880-1900 preindustrial baseline (NASA GISTEMP v4), with share of land and of population above 1.5°C, month-of-year playback 1880-2026.
 - 2026-09-12 Globe built (GISTEMP v4 through Aug 2026, GHS-POP 2025), pipeline in src/climateglobe, live on GitHub Pages.
+- 2026-09-12 Step 1 confirmed by Eric. Next: 2a, waiting for the slug and draft.
