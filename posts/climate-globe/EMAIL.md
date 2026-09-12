@@ -31,6 +31,8 @@ As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Aug
 `images/01-august-share-above-1-5.png`
 Alt: Line chart of the share of the world's land area and of today's population that was more than 1.5°C warmer than the same month in 1880-1900, for every August from 1880 to 2026. Both lines stay mostly under 25% until the 1990s, then climb, reaching 77% of land and 73% of population in August 2026.
 
+The chart shows the world as a whole. The globe shows where you live.
+
 ## 5. Call to action
 
 **[Spin the globe](https://www.data4thepeople.com/p/climate-globe)**
