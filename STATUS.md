@@ -6,7 +6,7 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: climate-globe
-Step: 2e
+Step: 2f
 Since: 2026-09-12
 
 ## Steps
