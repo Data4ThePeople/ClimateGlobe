@@ -27,12 +27,14 @@
       }
     },
     {
-      "slice_type": "divider_dots",
+      "slice_type": "spacer",
       "slice_label": null,
       "variation": "default",
       "version": "initial",
       "items": [],
-      "primary": {}
+      "primary": {
+        "spacer_value": "40px"
+      }
     },
     {
       "slice_type": "paragarph_text",
