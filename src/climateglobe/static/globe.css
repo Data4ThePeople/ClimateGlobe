@@ -223,7 +223,8 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
 /* --- hero render (#hero=1): a fixed 1680x1080 social card in the D4TP dark palette,
    screenshotted by the build for the post's hero image. ------------------------------- */
 html.hero, html.hero body { width: 1680px; height: 1080px; overflow: hidden; }
-html.hero body { background: #181A1B; color: #BBBDC0; --nodata: #8c8c88; }
+html.hero { --nodata: #8c8c88; }
+html.hero body { background: #181A1B; color: #BBBDC0; }
 .hero .wrap { max-width: none; width: 1680px; height: 1080px; padding: 0; position: relative; }
 .hero header.masthead, .hero .controls, .hero .chart, .hero .footnote, .hero .note,
 .hero .legend .keys, .hero #loading { display: none; }
