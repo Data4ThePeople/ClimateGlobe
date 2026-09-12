@@ -22,6 +22,7 @@ credit: Data 4 The People, from NASA GISS and the European Commission Joint Rese
 license: https://www.data4thepeople.com/terms-of-use
 app_url: https://data4thepeople.github.io/ClimateGlobe/dist/index.html
 app_name: Interactive globe: how much warmer than 1880-1900
+app_category: EducationalApplication
 app_description: Free interactive 3D globe of monthly temperature change since 1880 against the 1880-1900 baseline, with the share of land and people above 1.5°C.
 app_features: Spin the globe|Pick any month and play every year since 1880|Highlight only areas above 1.5°C|10-year average toggle|Share of land area and of population above 1.5°C|Hover for the value at any point
 drop_cap: false
