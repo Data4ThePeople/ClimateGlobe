@@ -20,23 +20,21 @@ dividers: true
 
 <iframe src="https://data4thepeople.github.io/ClimateGlobe/dist/index.html#embed=1" width="100%" height="780" loading="lazy" style="border:0" title="Interactive globe: how much warmer than 1880-1900"></iframe>
 
-:::divider dots
-
 ## Purpose
 
 This visualization answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5°C?
 
 The 1.5°C figure comes from the Paris Agreement, where countries agreed to try to hold global warming to 1.5°C above the pre-industrial level. That target is a global average over decades. But warming is not spread evenly. Land warms faster than oceans, the Arctic warms faster than the tropics, and a single month can run hot in one region and cold in another. A global average hides all of that.
 
-The globe above shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900, the earliest period in NASA's record and the period NASA uses to stand in for "pre-industrial." Two numbers beside the globe sum it up: the share of the world's land area that was more than 1.5°C above its baseline, and the share of today's population living in those places.
+The globe above shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900, the earliest period in NASA's record and the period NASA uses to stand in for "pre-industrial." Two of the numbers beside the globe sum it up: the share of the world's land area that was more than 1.5°C above its baseline, and the share of today's population living in those places.
 
 Pick a month, then press play. The globe runs through every year of that month since 1880, so you can watch the warm areas grow, shrink, and grow again over 147 years.
 
-## The globe
+## Using the globe
 
 Drag to spin it. Hover for the value at any point. The chart under the numbers tracks the two shares across every year of the chosen month.
 
-The tool is free to use and free to embed. It is also available as a full page at [data4thepeople.github.io/ClimateGlobe](https://data4thepeople.github.io/ClimateGlobe/dist/index.html), where you can link straight to a view: add `#month=3&year=1998` to the address to open March 1998, `hot=1` to highlight only the areas above 1.5°C, and `avg=1` for the 10-year average.
+The tool is free to use and free to embed. It is also available as a full page at [data4thepeople.github.io/ClimateGlobe](https://data4thepeople.github.io/ClimateGlobe/dist/index.html), where you can link straight to a view: add #month=3&year=1998 to the end of the address to open March 1998, hot=1 to highlight only the areas above 1.5°C, and avg=1 for the 10-year average.
 
 ### How to read it
 
