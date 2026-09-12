@@ -5,8 +5,8 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 
 ## Current
 
-Post: climate-globe
-Step: 2g
+Post: climate-globe (complete)
+Step: complete
 Since: 2026-09-12
 
 ## Steps
@@ -20,7 +20,7 @@ Since: 2026-09-12
 | 2d | Hero 1680x1080 + alt text | 2026-09-12 | Rendered from the globe's #hero=1 mode |
 | 2e | SEO | 2026-09-12 | Dataset graph, 9 FAQs, meta set |
 | 2f | Pushed to Prismic (draft) | 2026-09-12 | Draft aqWeixIAACwALva_ in Migration Release, dated 2026-09-13 19:00 ET |
-| 2g | Mailchimp teaser | | |
+| 2g | Mailchimp teaser | 2026-09-12 | Approved; Eric edited EMAIL.md |
 
 ## Stale
 
@@ -38,3 +38,4 @@ None.
 - 2026-09-12 Step 2d confirmed by Eric. Next: 2e SEO.
 - 2026-09-12 Step 2e confirmed by Eric. Next: 2f push to Prismic.
 - 2026-09-12 Step 2f confirmed by Eric. Next: 2g Mailchimp teaser.
+- 2026-09-12 Step 2g confirmed by Eric. Post complete. Prismic draft aqWeixIAACwALva_ in the Migration Release, dated 2026-09-13 19:00 ET.
