@@ -18,11 +18,13 @@ How much warmer is your part of the world than 1880-1900?
 
 ## 3. Body
 
-The 1.5°C target is a global average over decades. But warming is not spread evenly. Land warms faster than oceans, the Arctic warms faster than the tropics, and a single month can run hot in one region and cold in another. A global average hides all of that.
+You may have heard of this 1.5°C target for global warming above pre-industrial times (1850-1900) set by the Paris Agreement. You also may have heard that single years have now passed it. But you may not know, as I did not, how that warming is distributed across the globe.
+
+That's what I set out to understand today. 
 
 Our new interactive globe shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900. Pick a month, press play, and watch every year since 1880 go by.
 
-As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Augusts of 1880-1900 for the world as a whole. 77% of the world's land area was more than 1.5°C warmer, and 73% of today's population lives in places that were. The 10-year average of Augusts is lower, at 1.22°C, with 60% of land and 54% of people above the line. Single months swing. The floor keeps rising.
+As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Augusts of 1880-1900 for the world as a whole. 77% of the world's land area was more than 1.5°C warmer, and 73% of today's population lives in places that were. The 10-year average of Augusts is lower, at 1.22°C, with 60% of land and 54% of people above the line. As you'll see when you press play in the visualization, single months are very noisy, but the floor is rising fast.
 
 ## 4. Chart
 
