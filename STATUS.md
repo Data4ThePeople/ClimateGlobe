@@ -18,7 +18,7 @@ Since: 2026-09-12
 | 2b | Eric's edit, Claude's look-over | 2026-09-12 | Jargon pass, worked examples added |
 | 2c | Slice markup | 2026-09-12 | No dividers, no drop cap; 40px under globe, 20px around h2 |
 | 2d | Hero 1680x1080 + alt text | 2026-09-12 | Rendered from the globe's #hero=1 mode |
-| 2e | SEO | | |
+| 2e | SEO | 2026-09-12 | Dataset graph, 9 FAQs, meta set |
 | 2f | Pushed to Prismic (draft) | | |
 | 2g | Mailchimp teaser | | |
 
@@ -36,3 +36,4 @@ None.
 - 2026-09-12 Step 2b confirmed by Eric. Next: 2c slice markup.
 - 2026-09-12 Step 2c confirmed by Eric. Next: 2d hero.
 - 2026-09-12 Step 2d confirmed by Eric. Next: 2e SEO.
+- 2026-09-12 Step 2e confirmed by Eric. Next: 2f push to Prismic.
