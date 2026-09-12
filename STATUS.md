@@ -17,7 +17,7 @@ Since: 2026-09-12
 | 2a | Draft with brackets resolved | 2026-09-12 | Claude wrote the full visualization page per Eric |
 | 2b | Eric's edit, Claude's look-over | 2026-09-12 | Jargon pass, worked examples added |
 | 2c | Slice markup | 2026-09-12 | No dividers, no drop cap; 40px under globe, 20px around h2 |
-| 2d | Hero 1680x1080 + alt text | | |
+| 2d | Hero 1680x1080 + alt text | 2026-09-12 | Rendered from the globe's #hero=1 mode |
 | 2e | SEO | | |
 | 2f | Pushed to Prismic (draft) | | |
 | 2g | Mailchimp teaser | | |
@@ -35,3 +35,4 @@ None.
 - 2026-09-12 Step 2a confirmed by Eric. Next: 2b, Eric edits POST.md directly.
 - 2026-09-12 Step 2b confirmed by Eric. Next: 2c slice markup.
 - 2026-09-12 Step 2c confirmed by Eric. Next: 2d hero.
+- 2026-09-12 Step 2d confirmed by Eric. Next: 2e SEO.
