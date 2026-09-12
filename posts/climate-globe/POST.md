@@ -1,6 +1,6 @@
 ---
-title: Interactive Globe: How Much Warmer Is Each Part of the World Than 1880-1900?
-subtitle: Spin the globe, pick a month, and play every year since 1880. See where the 1.5°C line is crossed, how much land and how many people sit above it, and exactly how we built it.
+title: Global Warming Map: How Much Warmer Is Each Part of the World Than 1880-1900?
+subtitle: An interactive map of climate change since 1880. Spin the globe, pick a month, and play every year to see the temperature change in each part of the world, where the 1.5°C line is crossed, how much land and how many people sit above it, and exactly how we built it.
 slug: climate-globe
 date: 2026-09-12
 section: Visualization
@@ -30,7 +30,7 @@ caption_spacer: 20px
 dividers: false
 ---
 
-# Interactive Globe: How Much Warmer Is Each Part of the World Than 1880-1900?
+# Global Warming Map: How Much Warmer Is Each Part of the World Than 1880-1900?
 
 <iframe src="https://data4thepeople.github.io/ClimateGlobe/dist/index.html#embed=1" width="100%" height="780" loading="lazy" style="border:0" title="Interactive globe: how much warmer than 1880-1900"></iframe>
 
@@ -40,7 +40,7 @@ dividers: false
 
 ::: spacer
 
-This visualization answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5°C?
+This interactive map of global warming answers one question at a glance: how much warmer is each part of the world than it was before industrial warming began, and where has that change passed 1.5°C?
 
 The 1.5°C figure comes from the Paris Agreement, where countries agreed to try to hold global warming to 1.5°C above the pre-industrial level. That target is a global average over decades. But warming is not spread evenly. Land warms faster than oceans, the Arctic warms faster than the tropics, and a single month can run hot in one region and cold in another. A global average hides all of that.
 
@@ -80,7 +80,7 @@ The chart under the globe makes the swing visible. In the 1880s and 1890s, befor
 
 ::: spacer
 
-Every chart we publish should be something you can check, question, and rebuild yourself. This page documents how we built the globe: where the data comes from, every transformation we applied, and the judgment calls we made along the way. Nothing here is proprietary. The code and the built files are in a public repository, linked at the end.
+Every chart we publish should be something you can check, question, and rebuild yourself. This page documents how we built the globe: where the data comes from, every transformation we applied, and the judgment calls we made along the way. Nothing here is proprietary. It follows the same open approach as our [petroleum inventory seasonality page](https://www.data4thepeople.com/p/methodology-the-petroleum-inventory-seasonality-ch/), which documents a different dataset the same way. The code and the built files are in a public repository, linked at the end.
 
 ## The data sources
 
@@ -194,6 +194,10 @@ The code, the build steps, and the published files are at [github.com/Data4ThePe
 
 ::: spacer
 
+### What are the basic facts on climate change this map shows?
+
+Four things. The world as a whole was 1.60°C warmer in August 2026 than in the Augusts of 1880-1900, and the 10-year average of Augusts is 1.22°C warmer. Land has warmed more than the oceans. The Arctic has warmed most of all, by 3°C or more in many months. And warming is not a smooth line: single months swing above and below the trend, which is why the globe lets you play through every year.
+
 ### What does 1.5°C above pre-industrial mean?
 
 It means the global average surface temperature, averaged over many years, is 1.5°C warmer than it was in 1850-1900, before fossil fuel use changed the atmosphere. The Paris Agreement set 1.5°C as the level countries would try to stay under. This globe shows the same measure for each place on Earth, month by month, against 1880-1900.
@@ -221,3 +225,7 @@ The Global Human Settlement Layer from the European Commission's Joint Research 
 ### How often is the globe updated?
 
 Monthly, after NASA's release, which usually lands in the middle of the following month.
+
+### Is this a map of climate change or of weather?
+
+Both, depending on the setting. A single month is mostly weather laid on top of the trend. The 10-year average is close to climate. Playing through the years shows the trend pushing the weather upward.
