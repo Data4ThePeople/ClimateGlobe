@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} | Data 4 The People</title>
+<meta name="description" content="Spin the globe to see how much warmer each part of the world was than the 1880-1900 baseline in any month since 1880, and the share of land and people above 1.5°C. Built from NASA GISTEMP v4.">
+<style>{{ css }}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="brand-link" id="brand" href="https://www.data4thepeople.com" target="_blank" rel="noopener" aria-label="Data 4 The People">
+      <img class="brand brand-dark" src="{{ logo_dark }}" alt="Data 4 The People">
+      <img class="brand brand-light" src="{{ logo_light }}" alt="Data 4 The People">
+    </a>
+    <div class="masthead-text">
+      <h1>{{ title }}</h1>
+      <p>Monthly surface temperature compared with the same month in 1880-1900, the preindustrial baseline behind the 1.5°C target. Drag to spin. Data through {{ latest }}.</p>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="field">
+      <label for="month">Month</label>
+      <select id="month"></select>
+    </div>
+    <div class="field year">
+      <label for="year">Year <span id="yearlabel"></span></label>
+      <div class="yearrow">
+        <button type="button" id="play" aria-label="Play through the years">▶</button>
+        <input id="year" type="range" min="1880" max="{{ latest.split(' ')[1] }}" step="1">
+      </div>
+    </div>
+    <div class="field">
+      <label for="speed">Speed</label>
+      <select id="speed">
+        <option value="600">Slow</option>
+        <option value="300" selected>Normal</option>
+        <option value="120">Fast</option>
+      </select>
+    </div>
+    <div class="field toggles">
+      <label>View</label>
+      <label class="check"><input type="checkbox" id="hot"> Highlight only areas above 1.5°C</label>
+      <label class="check"><input type="checkbox" id="avg"> 10-year average of this month</label>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="globe-wrap">
+      <canvas id="globe" role="img" aria-label="Spinning globe colored by temperature anomaly versus 1880-1900"></canvas>
+      <div class="loading" id="loading" hidden></div>
+    </div>
+    <aside class="panel">
+      <div class="when" id="when"></div>
+      <div class="stat">
+        <div class="num" id="gmean"></div>
+        <div class="cap">global average, vs. 1880-1900</div>
+      </div>
+      <div class="stat2">
+        <div class="stat">
+          <div class="num hot" id="landpct"></div>
+          <div class="cap">of land area above 1.5°C</div>
+        </div>
+        <div class="stat">
+          <div class="num hot" id="poppct"></div>
+          <div class="cap">of people live where it is above 1.5°C</div>
+        </div>
+      </div>
+      <p class="note" id="covnote"></p>
+      <div class="legend">
+        <canvas id="legend" height="14"></canvas>
+        <div class="ends"><span>−6</span><span>−1.5</span><span>0</span><span>+1.5</span><span>+6°C</span></div>
+        <div class="keys"><span class="swatch nodata"></span> No data</div>
+      </div>
+      <div class="chart">
+        <div class="chart-title" id="charttitle"></div>
+        <canvas id="chart"></canvas>
+        <div class="chart-keys"><span class="k-land">Land area</span> and <span class="k-pop">population</span> above 1.5°C. Marker is the year shown.</div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="tip" role="tooltip"></div>
+
+  <div class="footer-row">
+    <p class="footnote">
+      Source: NASA GISS Surface Temperature Analysis (GISTEMP v4), 2°×2° grid with 1,200 km smoothing,
+      anomalies rebased from 1951-1980 to each cell's own 1880-1900 average for that calendar month.
+      NASA's record begins in 1880, so 1880-1900 stands in for the 1850-1900 period used by the IPCC.
+      Cells without at least ten baseline years ({{ fallback_pct }}% of cells, mostly ocean and polar) use the
+      average of their latitude band. Land share is area-weighted and counts Antarctica. Population is the
+      2025 GHS-POP grid from the EU Joint Research Centre, held fixed for every year, so the population
+      figure reads as the share of today's people. Early years have thin coverage; the note above the
+      legend says how much of the land and population had data. A single month at one place swings a lot
+      from year to year; the 10-year average is closer to how the 1.5°C target is defined.
+      Coastlines and borders from Natural Earth.
+    </p>
+    <div class="footer-brand" id="footer-brand">
+      <span class="built">Built by Data 4 The People</span>
+    </div>
+  </div>
+</div>
+
+<script>const PAYLOAD = {{ payload }};</script>
+<script>{{ js }}</script>
+</body>
+</html>
