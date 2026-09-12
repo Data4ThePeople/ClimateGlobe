@@ -219,3 +219,30 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
   .embed #chart { height: 120px; }
   .embed .footer-row { margin-top: 4px; }
 }
+
+/* --- hero render (#hero=1): a fixed 1680x1080 social card in the D4TP dark palette,
+   screenshotted by the build for the post's hero image. ------------------------------- */
+html.hero, html.hero body { width: 1680px; height: 1080px; overflow: hidden; }
+html.hero body { background: #181A1B; color: #BBBDC0; --nodata: #8c8c88; }
+.hero .wrap { max-width: none; width: 1680px; height: 1080px; padding: 0; position: relative; }
+.hero header.masthead, .hero .controls, .hero .chart, .hero .footnote, .hero .note,
+.hero .legend .keys, .hero #loading { display: none; }
+.hero .main { grid-template-columns: 880px 590px; grid-template-rows: auto auto; gap: 24px 70px;
+  padding: 100px 0 0 70px; align-items: center; }
+.hero .globe-wrap { width: 880px; grid-row: 1 / 3; }
+.hero .globe-wrap::before { box-shadow: 0 20px 80px rgba(0,0,0,0.7); }
+.hero .panel { gap: 14px; align-self: end; }
+.hero .hero-title { font-size: 38px; font-weight: 700; color: #ffffff; line-height: 1.12; margin-bottom: 10px; }
+.hero .when { font-size: 26px; color: #BBBDC0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.hero .stat .num { font-size: 118px; letter-spacing: -0.03em; color: #ffffff; line-height: 1; }
+.hero .stat .cap { font-size: 24px; color: #BBBDC0; margin-top: 6px; }
+.hero .stat2 { grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 14px; }
+.hero .stat2 .num { font-size: 80px; }
+.hero .stat2 .num.hot { color: #e6695f; }
+.hero .stat2 .cap { font-size: 20px; line-height: 1.3; }
+.hero .below { align-self: start; }
+.hero #legend { height: 18px; }
+.hero .legend .ends { font-size: 18px; color: #BBBDC0; }
+.hero .footer-row { position: absolute; right: 70px; bottom: 44px; margin: 0; }
+.hero .footer-brand .built { font-size: 18px; color: #BBBDC0; }
+.hero .footer-brand .brand { height: 46px; }

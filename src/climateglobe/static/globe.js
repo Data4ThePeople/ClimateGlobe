@@ -110,6 +110,17 @@
     if (y >= yrs[0] && y <= yrs[yrs.length - 1]) state.year = y;
     state.hot = h.get("hot") === "1";
     state.avg = h.get("avg") === "1";
+    // #hero=1: fixed 1680x1080 dark card for the post's hero image. No idle spin, fixed angle.
+    if (h.get("hero") === "1") {
+      document.documentElement.classList.add("hero");
+      document.documentElement.dataset.theme = "dark";
+      state.spun = true; state.lon0 = -25; state.lat0 = 18;
+      const t = document.createElement("div"); t.className = "hero-title";
+      t.textContent = "How much warmer than 1880\u20111900?";
+      const panel = $(".panel"); panel.insertBefore(t, panel.firstChild);
+      const brand = $("#brand"), footer = $("#footer-brand");
+      if (brand && footer) footer.insertBefore(brand, footer.firstChild);
+    }
   })();
   const yearsOf = (m) => META.years[String(m)];
   const idxOf = (m, y) => y - yearsOf(m)[0];

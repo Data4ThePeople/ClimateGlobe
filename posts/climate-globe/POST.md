@@ -5,7 +5,7 @@ slug: climate-globe
 date: 2026-09-12
 section: Visualization
 hero: images/climate-globe-hero-1680x1080.png
-hero_alt:
+hero_alt: A 3D globe centered on the Atlantic Ocean, colored by how much warmer August 2026 was than the same month in 1880-1900. Nearly the whole surface is red; the darkest reds cover Europe, North Africa, the Middle East, and the Arctic. Beside it: +1.60°C global average, 77% of land area and 73% of today's population above 1.5°C. Built by Data 4 The People from NASA GISTEMP data.
 meta_title: Global Warming Map: Temperature vs. 1880-1900, by Month
 description: Interactive 3D globe of monthly temperature change since 1880, with the share of land and people above 1.5°C. NASA GISTEMP data, fully documented.
 keywords: global temperature anomaly map, 1.5 degrees Celsius, pre-industrial baseline, NASA GISTEMP, climate change map, interactive globe, August 2026 temperature, global warming by region
