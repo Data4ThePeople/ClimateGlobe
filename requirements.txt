@@ -1,0 +1,6 @@
+numpy
+netCDF4
+rasterio
+pyshp
+Jinja2>=3.1
+Pillow
