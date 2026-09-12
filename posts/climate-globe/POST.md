@@ -2,7 +2,8 @@
 title: Global Warming Map: How Much Warmer Is Each Part of the World Than 1880-1900?
 subtitle: An interactive map of climate change since 1880. Spin the globe, pick a month, and play every year to see the temperature change in each part of the world, where the 1.5°C line is crossed, how much land and how many people sit above it, and exactly how we built it.
 slug: climate-globe
-date: 2026-09-12
+date: 2026-09-13
+time: 19:00:00-04:00
 section: Visualization
 hero: images/climate-globe-hero-1680x1080.png
 hero_alt: A 3D globe centered on the Atlantic Ocean, colored by how much warmer August 2026 was than the same month in 1880-1900. Nearly the whole surface is red; the darkest reds cover Europe, North Africa, the Middle East, and the Arctic. Beside it: +1.60°C global average, 77% of land area and 73% of today's population above 1.5°C. Built by Data 4 The People from NASA GISTEMP data.
