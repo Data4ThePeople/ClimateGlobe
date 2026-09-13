@@ -3,7 +3,7 @@
 Post URL: https://www.data4thepeople.com/p/climate-globe
 
 ```
-Subject:  77% of land is now 1.5°C warmer
+Subject:  77% of land is now over 1.5°C warmer
 Preview:  Spin the globe: every August since 1880, and where warming has passed 1.5°C.
 ```
 
