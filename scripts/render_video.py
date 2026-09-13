@@ -13,7 +13,9 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 FPS = 30
-FRAMES_PER_YEAR = 6
+FRAMES_PER_YEAR = 6        # 5 years a second from SLOW_FROM on
+FAST_FRAMES = 3            # 10 years a second before SLOW_FROM
+SLOW_FROM = 1970
 HOLD_START, HOLD_END = 45, 90
 SPIN = 0.4          # degrees of longitude per frame
 LAT0 = 18
@@ -45,7 +47,7 @@ def main():
     lon = -60.0
     for _ in range(HOLD_START): plan.append((first, lon)); lon += SPIN
     for y in range(first, LAST + 1):
-        for _ in range(FRAMES_PER_YEAR): plan.append((y, lon)); lon += SPIN
+        for _ in range(FAST_FRAMES if y < SLOW_FROM else FRAMES_PER_YEAR): plan.append((y, lon)); lon += SPIN
     for _ in range(HOLD_END): plan.append((LAST, lon)); lon += SPIN
     if a.test: plan = plan[:30]
     print(f"{len(plan)} frames = {len(plan)/FPS:.1f} s at {FPS} fps")
