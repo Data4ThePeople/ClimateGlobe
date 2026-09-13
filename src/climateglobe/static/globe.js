@@ -120,6 +120,7 @@
       const panel = $(".panel"); panel.insertBefore(t, panel.firstChild);
       const brand = $("#brand"), footer = $("#footer-brand");
       if (brand && footer) footer.insertBefore(brand, footer.firstChild);
+      if (h.get("video") === "1") document.documentElement.classList.add("video");
     }
   })();
   const yearsOf = (m) => META.years[String(m)];
@@ -305,7 +306,7 @@ void main() {
   }
 
   // ---------------------------------------------------------------- readouts
-  const fmtPct = (v) => v == null ? "n/a" : `${(100 * v).toFixed(v < 0.1 ? 1 : 0)}%`;
+  const fmtPct = (v) => v == null || Number.isNaN(v) ? "n/a" : `${(100 * v).toFixed(v < 0.1 ? 1 : 0)}%`;
   const fmtDeg = (v) => v == null ? "n/a" : `${v >= 0 ? "+" : "−"}${Math.abs(v).toFixed(2)}°C`;
   function statsFor() {
     const s = STATS[String(state.month)][state.avg ? "trailing" : "single"];
@@ -528,6 +529,18 @@ void main() {
     tip.style.left = `${x}px`; tip.style.top = `${y}px`;
   }
 
+  // Frame control for the video render: set the view, draw synchronously, report readiness.
+  window.CG = {
+    ready: false,
+    set(year, lon0, lat0, avg) {
+      if (year != null) { state.year = year; yearIn.value = year; }
+      if (lon0 != null) state.lon0 = lon0;
+      if (lat0 != null) state.lat0 = lat0;
+      if (avg != null) { state.avg = !!avg; $("#avg").checked = state.avg; }
+      computeView(); uploadView(); updateReadouts(); drawChart(); draw();
+    },
+  };
+
   // ---------------------------------------------------------------- boot
   window.addEventListener("resize", () => { drawLegend(); drawChart(); request(); });
   linesTexture();
@@ -539,5 +552,6 @@ void main() {
     $("#loading").hidden = true;
     refresh();
     idleSpin();
+    window.CG.ready = true;
   }).catch((e) => { $("#loading").textContent = `Could not load data (${e.message}).`; });
 })();
