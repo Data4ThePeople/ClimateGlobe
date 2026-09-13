@@ -2,30 +2,25 @@
 
 Post URL: https://www.data4thepeople.com/p/climate-globe
 Video: climate-globe-august-single.mp4 (X) / climate-globe-august-single-square.mp4 (LinkedIn)
+Text is taken from the approved POST.md and EMAIL.md.
 
 ## X
 
-Every August since 1880, compared with the same month in 1880-1900.
+Against the same month in 1880-1900, 77% of the world's land area was more than 1.5°C warmer this August. 73% of today's population lives in places that were.
 
-August 2026: 77% of the world's land and 73% of its people were more than 1.5°C warmer.
-
-Spin the globe, pick any month, play the years:
+Single months are very noisy, but the floor is rising fast. Pick your month, press play, and watch your own part of the world change:
 https://www.data4thepeople.com/p/climate-globe
 
 ## LinkedIn
 
-The 1.5°C target is a global average over decades. It says nothing about where you live.
+You may have heard of this 1.5°C target for global warming above pre-industrial times (1850-1900) set by the Paris Agreement. You also may have heard that single years have now passed it. But you may not know, as I did not, how that warming is distributed across the globe.
 
-So we built a globe that does. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900, using NASA's GISTEMP grid. Pick a month, press play, and watch every year since 1880 go by. This clip is August.
+That's what I set out to understand.
 
-What it shows for August 2026, against the Augusts of 1880-1900:
+Our new interactive globe shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900. Pick a month, press play, and watch every year since 1880 go by. This clip is August.
 
-- The world as a whole was 1.60°C warmer.
-- 77% of the world's land area was more than 1.5°C warmer.
-- 73% of today's population lives in places that were.
+As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Augusts of 1880-1900 for the world as a whole. 77% of the world's land area was more than 1.5°C warmer, and 73% of today's population lives in places that were. The 10-year average of Augusts is lower, at 1.22°C, with 60% of land and 54% of people above the line. As you'll see when you press play, single months are very noisy, but the floor is rising fast.
 
-Single months swing, which is what you see in the clip. The 10-year average of Augusts is lower, at 1.22°C, with 60% of land and 54% of people above the line. The tool has a toggle for both.
-
-Everything about how we built it is on the page: the data, the baseline, the borrowed baselines where 1880 had no weather stations, and the limits. Free to use and free to embed.
+The chart shows the world as a whole. The globe shows where you live. Pick your month, press play, and watch your own part of the world change. The tool is free to use and free to embed.
 
 https://www.data4thepeople.com/p/climate-globe
