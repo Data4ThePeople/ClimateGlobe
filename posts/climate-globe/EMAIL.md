@@ -20,7 +20,7 @@ How much warmer is your part of the world than 1880-1900?
 
 You may have heard of this 1.5°C target for global warming above pre-industrial times (1850-1900) set by the Paris Agreement. You also may have heard that single years have now passed it. But you may not know, as I did not, how that warming is distributed across the globe.
 
-That's what I set out to understand today. 
+That's what I set out to understand today.
 
 Our new interactive globe shows the local picture. Every point on Earth is colored by how much warmer or cooler a given month was than the same month in 1880-1900. Pick a month, press play, and watch every year since 1880 go by.
 
@@ -31,7 +31,7 @@ As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Aug
 `images/01-august-share-above-1-5.png`
 Alt: Line chart of the share of the world's land area and of today's population that was more than 1.5°C warmer than the same month in 1880-1900, for every August from 1880 to 2026. Both lines stay mostly under 25% until the 1990s, then climb, reaching 77% of land and 73% of population in August 2026.
 
-The chart shows the world as a whole. The globe shows where you live. Pick your month, press play, and watch your own part of the world change.
+The chart shows the world as a whole. The globe shows where you live. Pick your month, press play, and watch your own part of the world change. Start with the "10-year average" box checked to smooth out the year-to-year swings and see the trend, then uncheck it to watch the swings themselves.
 
 ## 5. Call to action
 
