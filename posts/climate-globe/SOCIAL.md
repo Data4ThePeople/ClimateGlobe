@@ -8,7 +8,7 @@ Text is taken from the approved POST.md and EMAIL.md.
 
 Against the same month in 1880-1900, 77% of the world's land area was more than 1.5°C warmer this August. 73% of today's population lives in places that were.
 
-Single months are very noisy, but the floor is rising fast. Pick your month, press play, and watch your own part of the world change:
+Pick your month, press play, and watch your own part of the world change:
 https://www.data4thepeople.com/p/climate-globe
 
 ## LinkedIn
