@@ -121,6 +121,7 @@
       const brand = $("#brand"), footer = $("#footer-brand");
       if (brand && footer) footer.insertBefore(brand, footer.firstChild);
       if (h.get("video") === "1") document.documentElement.classList.add("video");
+      if (h.get("square") === "1") document.documentElement.classList.add("square");
     }
   })();
   const yearsOf = (m) => META.years[String(m)];

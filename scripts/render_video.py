@@ -28,17 +28,23 @@ def serve(directory, port):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--test", action="store_true", help="render 30 frames only")
-    ap.add_argument("--out", default=str(ROOT / "posts/climate-globe/video/climate-globe-august-10yr.mp4"))
+    ap.add_argument("--out", default=None)
     ap.add_argument("--width", type=int, default=1920); ap.add_argument("--height", type=int, default=1080)
+    ap.add_argument("--square", action="store_true", help="1080x1080 layout")
+    ap.add_argument("--single", action="store_true", help="single-month view instead of the 10-year average")
     a = ap.parse_args()
-    out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
+    if a.square: a.width = a.height = 1080
+    first = 1880 if a.single else FIRST
+    name = f"climate-globe-august-{'single' if a.single else '10yr'}{'-square' if a.square else ''}.mp4"
+    out = Path(a.out) if a.out else ROOT / "posts/climate-globe/video" / name
+    out.parent.mkdir(parents=True, exist_ok=True)
     port = 8791
     httpd = serve(DIST, port)
     frames_dir = Path(tempfile.mkdtemp(prefix="cg-frames-"))
     plan = []                                   # (year, lon0)
     lon = -60.0
-    for _ in range(HOLD_START): plan.append((FIRST, lon)); lon += SPIN
-    for y in range(FIRST, LAST + 1):
+    for _ in range(HOLD_START): plan.append((first, lon)); lon += SPIN
+    for y in range(first, LAST + 1):
         for _ in range(FRAMES_PER_YEAR): plan.append((y, lon)); lon += SPIN
     for _ in range(HOLD_END): plan.append((LAST, lon)); lon += SPIN
     if a.test: plan = plan[:30]
@@ -48,10 +54,10 @@ def main():
         b = p.chromium.launch(channel="chrome", headless=True,
                               args=["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-gpu"])
         pg = b.new_page(viewport={"width": a.width, "height": a.height}, device_scale_factor=1)
-        pg.goto(f"http://127.0.0.1:{port}/index.html#hero=1&video=1&month=8&avg=1&year={FIRST}")
+        pg.goto(f"http://127.0.0.1:{port}/index.html#hero=1&video=1&month=8&year={first}" + ("" if a.single else "&avg=1") + ("&square=1" if a.square else ""))
         pg.wait_for_function("window.CG && window.CG.ready", timeout=60000)
         for i, (y, l) in enumerate(plan):
-            pg.evaluate(f"CG.set({y}, {l:.3f}, {LAT0}, true)")
+            pg.evaluate(f"CG.set({y}, {l:.3f}, {LAT0}, {'false' if a.single else 'true'})")
             pg.screenshot(path=str(frames_dir / f"f{i:05d}.jpg"), type="jpeg", quality=92)
             if i % 100 == 0: print(f"  frame {i}/{len(plan)}  {time.time()-t0:.0f}s", flush=True)
         b.close()
