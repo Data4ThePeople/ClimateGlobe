@@ -442,7 +442,12 @@ void main() {
     if (!frames[fkey(base, m)]) {
       $("#loading").textContent = `Loading ${P.months[m - 1]}…`; $("#loading").hidden = false;
       try { await loadMonth(m, base); }
-      catch (e) { $("#loading").textContent = `Could not load ${P.months[m - 1]} (${e.message}).`; return; }
+      catch (e) {
+        $("#loading").textContent = location.protocol === "file:"
+          ? `Could not load ${P.months[m - 1]}: this page was opened from a file. Open it from a web server or the live link.`
+          : `Could not load ${P.months[m - 1]} (${e.message}).`;
+        return;
+      }
       $("#loading").hidden = true;
       if (state.month !== m || state.base !== base) return;
     }
