@@ -16,8 +16,8 @@
       <img class="brand brand-light" src="{{ logo_light }}" alt="Data 4 The People">
     </a>
     <div class="masthead-text">
-      <h1>{{ title }}</h1>
-      <p>Monthly surface temperature compared with the same month in 1880-1900, the preindustrial baseline behind the 1.5°C target. Drag to spin. Data through {{ latest }}.</p>
+      <h1 id="title">{{ title }}</h1>
+      <p>Monthly surface temperature compared with the same month in 1880-1900, the preindustrial baseline behind the 1.5°C target, or with NASA's 1951-1980 baseline. Drag to spin. Data through {{ latest }}.</p>
     </div>
   </header>
 
@@ -45,6 +45,7 @@
       <label>View</label>
       <label class="check"><input type="checkbox" id="hot"> Highlight only areas above 1.5°C</label>
       <label class="check"><input type="checkbox" id="avg"> 10-year average of this month</label>
+      <label class="check"><input type="checkbox" id="nasa"> NASA's 1951-1980 baseline</label>
     </div>
   </div>
 
@@ -57,16 +58,16 @@
       <div class="when" id="when"></div>
       <div class="stat">
         <div class="num" id="gmean"></div>
-        <div class="cap">global average, vs. 1880-1900</div>
+        <div class="cap" id="gmeancap">global average, vs. 1880-1900</div>
       </div>
       <div class="stat2">
         <div class="stat">
           <div class="num hot" id="landpct"></div>
-          <div class="cap">of land area above 1.5°C</div>
+          <div class="cap">of land area above 1.5°C<span class="vs"></span></div>
         </div>
         <div class="stat">
           <div class="num hot" id="poppct"></div>
-          <div class="cap">of people live where it is above 1.5°C</div>
+          <div class="cap">of people live where it is above 1.5°C<span class="vs"></span></div>
         </div>
       </div>
       <p class="note" id="covnote"></p>
@@ -80,7 +81,8 @@
       <div class="chart">
         <div class="chart-title" id="charttitle"></div>
         <canvas id="chart"></canvas>
-        <div class="chart-keys"><span class="k-land">Land area</span> and <span class="k-pop">population</span> above 1.5°C. Marker is the year shown.</div>
+        <div class="chart-keys"><span class="k-land">Land area</span> and <span class="k-pop">population</span> above 1.5°C<span class="vs"></span>. Marker is the year shown.</div>
+        <p class="note" id="basenote" hidden></p>
       </div>
     </div>
   </div>
@@ -100,6 +102,9 @@
       figure reads as the share of today's people. Early years have thin coverage; the note above the
       legend says how much of the land and population had data. A single month at one place swings a lot
       from year to year; the 10-year average is closer to how the 1.5°C target is defined.
+      The 1951-1980 option shows NASA's anomalies as published, with no rebasing and no latitude-band fill-in.
+      That period has far more measurements than 1880-1900, but it was already warmer, so the same 1.5°C line
+      is a higher bar and the shares above it are lower. The places that warmed most are the same under both.
       Coastlines and borders from Natural Earth.
     </p>
     <div class="footer-brand" id="footer-brand">

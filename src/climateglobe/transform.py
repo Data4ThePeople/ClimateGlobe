@@ -3,8 +3,10 @@
 Outputs in data/work/:
   meta.json          lat/lon axes, years per month, constants
   frames_mMM.npy     uint8 [n_years, 90, 180] quantized anomaly vs 1880-1900, 0 = missing
+  frames_nasa_mMM.npy  the same for NASA's own 1951-1980 anomaly
   stats.json         per month, per year: global mean, % land > 1.5, % pop > 1.5, coverage,
-                     for the single-month and the 10-year trailing variants
+                     for the single-month and the 10-year trailing variants; keys ending
+                     in _nasa use the 1951-1980 baseline
   landfrac.npy       float32 [90, 180] land fraction of each cell
   pop.npy            float64 [90, 180] 2025 population of each cell
   fallback.npy       bool [12, 90, 180] cells whose baseline came from the zonal mean
@@ -130,6 +132,24 @@ def frame_stats(x, area, landfrac, pop):
     }
 
 
+def series_stats(grid, area, landfrac, pop):
+    """Per-year stats for one month's stack, single year and trailing average."""
+    single, trailing = [], []
+    for i in range(len(grid)):
+        single.append(frame_stats(grid[i], area, landfrac, pop))
+        lo = max(0, i - C.TRAILING_YEARS + 1)
+        win = grid[lo:i + 1]
+        if len(win) >= C.TRAILING_MIN_YEARS:
+            n = np.sum(~np.isnan(win), axis=0)
+            with np.errstate(invalid="ignore"):
+                avg = np.nanmean(win, axis=0)
+            avg[n < C.TRAILING_MIN_YEARS] = np.nan
+            trailing.append(frame_stats(avg, area, landfrac, pop))
+        else:
+            trailing.append(None)
+    return single, trailing
+
+
 def quantize(x):
     q = np.round(x * C.Q_SCALE) + C.Q_OFFSET
     q = np.clip(q, 1, 255)
@@ -152,28 +172,25 @@ def main():
     meta = {"lat": lat.tolist(), "lon": lon.tolist(), "threshold": C.THRESHOLD,
             "baseline": [C.BASELINE_START, C.BASELINE_END], "trailing": C.TRAILING_YEARS,
             "q_scale": C.Q_SCALE, "q_offset": C.Q_OFFSET, "years": {}, "fallback_cells": {}}
+    meta["offset"] = {}
     stats = {}
     for m in range(1, 13):
         sel = np.where(months == m)[0]
         yrs = years[sel]
-        pre = anom[sel] - base[m - 1][None]           # anomaly vs 1880-1900, [n_years, 90, 180]
+        raw = anom[sel]                               # NASA's own anomaly vs 1951-1980
+        pre = raw - base[m - 1][None]                 # anomaly vs 1880-1900, [n_years, 90, 180]
+        b = base[m - 1]
         meta["years"][str(m)] = yrs.tolist()
         meta["fallback_cells"][str(m)] = int(fallback[m - 1].sum())
+        # how much warmer 1951-1980 was than 1880-1900, area-weighted (the base is negative)
+        meta["offset"][str(m)] = round(-float(np.nansum(b * area) / area[~np.isnan(b)].sum()), 3)
         np.save(C.WORK / f"frames_m{m:02d}.npy", quantize(pre))
-        single, trailing = [], []
-        for i, y in enumerate(yrs):
-            single.append(frame_stats(pre[i], area, landfrac, pop))
-            lo = max(0, i - C.TRAILING_YEARS + 1)
-            win = pre[lo:i + 1]
-            if len(win) >= C.TRAILING_MIN_YEARS:
-                n = np.sum(~np.isnan(win), axis=0)
-                with np.errstate(invalid="ignore"):
-                    avg = np.nanmean(win, axis=0)
-                avg[n < C.TRAILING_MIN_YEARS] = np.nan
-                trailing.append(frame_stats(avg, area, landfrac, pop))
-            else:
-                trailing.append(None)
-        stats[str(m)] = {"single": single, "trailing": trailing}
+        np.save(C.WORK / f"frames_nasa_m{m:02d}.npy", quantize(raw))
+        stats[str(m)] = {}
+        for suffix, grid in (("", pre), ("_nasa", raw)):
+            single, trailing = series_stats(grid, area, landfrac, pop)
+            stats[str(m)]["single" + suffix] = single
+            stats[str(m)]["trailing" + suffix] = trailing
     np.save(C.WORK / "landfrac.npy", landfrac)
     np.save(C.WORK / "pop.npy", pop)
     np.save(C.WORK / "fallback.npy", fallback)
@@ -188,13 +205,15 @@ def main():
     off = float(np.nansum(base[m - 1] * area) / area[~np.isnan(base[m - 1])].sum())
     print(f"August baseline (1880-1900 minus 1951-1980), area-weighted: {off:+.3f} C")
     print(f"August cells using zonal fallback baseline: {int(fallback[m-1].sum())} of {fallback[m-1].size}")
-    print(f"{'August':>8} {'vs1951-80':>10} {'vs1880-1900':>12} {'%land>1.5':>10} {'%pop>1.5':>9} {'cov_land':>9} {'cov_pop':>8}")
+    print(f"{'August':>8} {'vs1951-80':>10} {'vs1880-1900':>12} {'%land>1.5':>10} {'%pop>1.5':>9} {'cov_land':>9} {'cov_pop':>8} {'NASA %land':>10} {'NASA %pop':>9}")
     for y in (2026, 2024, 2016, 1998, 1950, 1900):
         i = int(np.where(yrs == y)[0][0])
         raw = anom[sel[i]]
         s = stats[str(m)]["single"][i]
         raw_mean = float(np.nansum(raw * area) / area[~np.isnan(raw)].sum())
-        print(f"{y:>8} {raw_mean:>+10.3f} {s['mean']:>+12.3f} {100*s['land']:>9.1f}% {100*s['pop']:>8.1f}% {100*s['cov_land']:>8.1f}% {100*s['cov_pop']:>7.1f}%")
+        sn = stats[str(m)]["single_nasa"][i]
+        assert abs(sn["mean"] - raw_mean) < 1e-9, "NASA-baseline mean must equal the raw grid mean"
+        print(f"{y:>8} {raw_mean:>+10.3f} {s['mean']:>+12.3f} {100*s['land']:>9.1f}% {100*s['pop']:>8.1f}% {100*s['cov_land']:>8.1f}% {100*s['cov_pop']:>7.1f}% {100*sn['land']:>9.1f}% {100*sn['pop']:>8.1f}%")
     print("NASA GLB.Ts+dSST table, Aug 2026 vs 1951-1980: +1.40")
     # independent brute-force recomputation for Aug 2026
     i = int(np.where(yrs == 2026)[0][0])
@@ -211,6 +230,9 @@ def main():
     print(f"brute-force Aug 2026: %land>1.5 = {100*num_l/den_l:.2f}%   %pop>1.5 = {100*num_p/den_p:.2f}%")
     t = stats[str(m)]["trailing"][i]
     print(f"10-yr trailing Aug 2017-2026: mean {t['mean']:+.3f}  %land>1.5 {100*t['land']:.1f}%  %pop>1.5 {100*t['pop']:.1f}%")
+    t = stats[str(m)]["trailing_nasa"][i]
+    print(f"  same, NASA 1951-1980 baseline: mean {t['mean']:+.3f}  %land>1.5 {100*t['land']:.1f}%  %pop>1.5 {100*t['pop']:.1f}%")
+    print("1951-1980 minus 1880-1900 by month:", meta["offset"])
 
 
 if __name__ == "__main__":
