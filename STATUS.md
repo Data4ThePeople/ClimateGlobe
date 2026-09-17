@@ -6,8 +6,8 @@ Process: ~/.claude/d4tp-process/PROCESS.md
 ## Current
 
 Post: climate-globe (complete)
-Step: complete
-Since: 2026-09-12
+Step: 1 (reopened)
+Since: 2026-09-17
 
 ## Steps
 
@@ -24,7 +24,13 @@ Since: 2026-09-12
 
 ## Stale
 
-None.
+- 2a (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2b (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2c (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2d (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2e (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2f (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
+- 2g (stale 2026-09-17: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data)
 
 ## Log
 
@@ -39,3 +45,4 @@ None.
 - 2026-09-12 Step 2e confirmed by Eric. Next: 2f push to Prismic.
 - 2026-09-12 Step 2f confirmed by Eric. Next: 2g Mailchimp teaser.
 - 2026-09-12 Step 2g confirmed by Eric. Post complete. Prismic draft aqWeixIAACwALva_ in the Migration Release, dated 2026-09-13 19:00 ET.
+- 2026-09-17 Step back to 1: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data. Also planned: a social follow-up post thanking the commenter. 2a-2g stale.
