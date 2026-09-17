@@ -41,3 +41,4 @@ None.
 - 2026-09-12 Step 2g confirmed by Eric. Post complete. Prismic draft aqWeixIAACwALva_ in the Migration Release, dated 2026-09-13 19:00 ET.
 - 2026-09-17 Step back to 1: reopened Step 1 to add a NASA 1951-1980 baseline toggle after a LinkedIn comment on sparse 1880-1900 data. Also planned: a social follow-up post thanking the commenter. 2a-2g stale.
 - 2026-09-17 NASA 1951-1980 baseline toggle live (view starts in 1951). Eric closed Step 1 and chose not to re-run 2a-2g: the post embeds the live globe, so the toggle shows without a re-push. Post complete. LinkedIn reply saved in SOCIAL.md.
+- 2026-09-17 POST.md updated for the NASA baseline toggle (Step 9, limitation note, 4 new common questions); Eric accepted all 10 edits. Re-pushed to Prismic: draft aqWeixIAACwALva_ updated in the Migration Release.

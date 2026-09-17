@@ -12,7 +12,7 @@ description: Interactive map of global warming: spin the globe to see the temper
 keywords: global warming map, map of climate change, temperature change since 1880, climate change facts, 1.5 degrees Celsius, pre-industrial baseline, NASA GISTEMP, interactive globe
 schema_type: dataset
 dataset_name: Monthly temperature change vs. 1880-1900 for every 2° grid cell on Earth, 1880-2026
-dataset_description: Monthly surface temperature anomaly for every 2°x2° cell on Earth relative to that cell's own 1880-1900 average for the same calendar month, January 1880 through August 2026, with the share of land area and of 2025 population above 1.5°C. Built from NASA GISTEMP v4, GHS-POP 2025 and Natural Earth.
+dataset_description: Monthly surface temperature anomaly for every 2°x2° cell on Earth relative to that cell's own 1880-1900 average for the same calendar month, January 1880 through August 2026, with the share of land area and of 2025 population above 1.5°C. Built from NASA GISTEMP v4, GHS-POP 2025 and Natural Earth. An optional view shows NASA's own anomalies against 1951-1980, from 1951 on.
 temporal: 1880-01/2026-08
 spatial: World
 measured: Surface temperature anomaly vs. 1880-1900|degrees Celsius; Share of land area above 1.5°C|percent; Share of population above 1.5°C|percent
@@ -25,7 +25,7 @@ app_url: https://data4thepeople.github.io/ClimateGlobe/dist/index.html
 app_name: Interactive globe: how much warmer than 1880-1900
 app_category: EducationalApplication
 app_description: Free interactive 3D globe of monthly temperature change since 1880 against the 1880-1900 baseline, with the share of land and people above 1.5°C.
-app_features: Spin the globe|Pick any month and play every year since 1880|Highlight only areas above 1.5°C|10-year average toggle|Share of land area and of population above 1.5°C|Hover for the value at any point
+app_features: Spin the globe|Pick any month and play every year since 1880|Highlight only areas above 1.5°C|10-year average toggle|NASA 1951-1980 baseline toggle, from 1951|Share of land area and of population above 1.5°C|Hover for the value at any point
 drop_cap: false
 heading_spacer: 20px
 caption_spacer: 20px
@@ -56,13 +56,14 @@ Pick a month, then press play. The globe runs through every year of that month s
 
 Drag to spin it. Hover for the value at any point. The chart under the numbers tracks the two shares across every year of the chosen month.
 
-The tool is free to use and free to embed. It is also available as a full page at [data4thepeople.github.io/ClimateGlobe](https://data4thepeople.github.io/ClimateGlobe/dist/index.html), where you can link straight to a view: add #month=3&year=1998 to the end of the address to open March 1998, hot=1 to highlight only the areas above 1.5°C, and avg=1 for the 10-year average.
+The tool is free to use and free to embed. It is also available as a full page at [data4thepeople.github.io/ClimateGlobe](https://data4thepeople.github.io/ClimateGlobe/dist/index.html), where you can link straight to a view: add #month=3&year=1998 to the end of the address to open March 1998, hot=1 to highlight only the areas above 1.5°C, avg=1 for the 10-year average, and base=nasa for NASA's 1951-1980 baseline.
 
 ### How to read it
 
 - **Color** runs from blue (cooler than 1880-1900) through white (no change) to red (warmer). Pale red means warmer but still under 1.5°C. The red darkens past 1.5°C and reaches its deepest shade at 6°C. The legend marks the 1.5°C point.
 - **Highlight only areas above 1.5°C** turns everything at or below the line gray, so the areas past it stand out.
 - **10-year average of this month** replaces the single month with the average of the last ten of that month. This is the better match for how the 1.5°C target is defined, and it is much less jumpy.
+- **NASA's 1951-1980 baseline** shows NASA's numbers as published, measured from 1951-1980 instead of 1880-1900. That period has far more measurements. It was also already warmer, so 1.5°C above it is a higher bar and the numbers are lower. This view starts in 1951 and uses no earlier data.
 - **Gray patches** are places where NASA reports no value for that month. Early years have many. The note above the legend says how much of the land and population had data.
 - **The three numbers** are the global average change, the share of land area above 1.5°C, and the share of today's population living where it is above 1.5°C. All three follow the month, year, and average setting you choose.
 
@@ -90,7 +91,7 @@ Every chart we publish should be something you can check, question, and rebuild 
 
 Three public datasets go into the globe. We do not alter any of the underlying figures. Our work is moving the baseline, adding up land and people, and drawing the globe.
 
-**Temperature: NASA GISTEMP v4.** The NASA Goddard Institute for Space Studies publishes the GISS Surface Temperature Analysis, a monthly map of temperature change covering the world since January 1880. NASA divides the world into cells 2° of latitude by 2° of longitude, about 220 km on a side at the equator. Each cell's value blends every weather station within 1,200 km with ship and buoy readings of sea surface temperature. (NASA's names for those two inputs are GHCN v4 and ERSST v5.) Each cell holds one value per month: how far that month's temperature departed from that cell's normal for the same calendar month. NASA measures "normal" from 1951-1980; we move it back to 1880-1900 in Step 2, so nothing on the globe is compared with 1951-1980. The file is free, needs no login, and is updated around the middle of each month with the prior month's data.
+**Temperature: NASA GISTEMP v4.** The NASA Goddard Institute for Space Studies publishes the GISS Surface Temperature Analysis, a monthly map of temperature change covering the world since January 1880. NASA divides the world into cells 2° of latitude by 2° of longitude, about 220 km on a side at the equator. Each cell's value blends every weather station within 1,200 km with ship and buoy readings of sea surface temperature. (NASA's names for those two inputs are GHCN v4 and ERSST v5.) Each cell holds one value per month: how far that month's temperature departed from that cell's normal for the same calendar month. NASA measures "normal" from 1951-1980; we move it back to 1880-1900 in Step 2. The one exception is the optional NASA baseline view (Step 9), which keeps 1951-1980. The file is free, needs no login, and is updated around the middle of each month with the prior month's data.
 
 **Population: GHS-POP 2025.** The European Commission's Joint Research Centre publishes the Global Human Settlement Layer, a population grid built from census data and satellite imagery. We use the 2025 estimate, which counts people in squares about one kilometer on a side. It sums to 8.19 billion people.
 
@@ -154,7 +155,15 @@ Color values are stored at a tenth of a degree, which is enough for the eye. All
 
 The globe is drawn by your device's graphics chip, using code we wrote rather than an off-the-shelf mapping tool. For every pixel on the screen, the page works out which point on a sphere it is looking at, converts that to latitude and longitude, and blends the four surrounding cells so the coloring is continuous rather than blocky. Coastlines and borders are drawn once onto a flat map image and wrapped around the same sphere. Dragging changes the rotation; nothing else is recomputed.
 
-Each calendar month's 147 years of maps ship as one compressed file of under a megabyte. August is built into the page. The other eleven months download the first time you select them.
+Each calendar month's 147 years of maps ship as one compressed file of under a megabyte. August is built into the page. The other eleven months, and the NASA baseline view, download the first time you select them.
+
+### Step 9: NASA's 1951-1980 view
+
+A reader pointed out that 1880-1900 has very little data, especially at sea. Ships covered only a small part of the ocean then, and NASA's ocean source fills the gaps with statistical estimates. To offer a view that leans on more measurements, the globe has a toggle that uses NASA's own 1951-1980 baseline. It shows NASA's values as published, with no baseline shift and no borrowed baselines, and it starts in 1951.
+
+The numbers are lower in this view because 1951-1980 was already warmer than 1880-1900. For August the gap is 0.18°C worldwide, and it ranges from 0.16°C to 0.32°C depending on the month. Against 1951-1980, August 2026 was 1.42°C warmer, with 69% of land and 58% of people more than 1.5°C above it. The 10-year average of Augusts is 1.04°C, with 42% of land and 29% of people above the line.
+
+The places that stand out are largely the same in both views. For August 2026 the two maps have a correlation of 0.94, and 87% of the warmest fifth of the map is the same under both.
 
 ## Updating
 
@@ -174,6 +183,8 @@ We would rather tell you the edges of this than have you find them.
 
 **Borrowed baselines cover a quarter of the land and a tenth of the people.** For Antarctica, the tropical interiors, the deserts of western China, and the Arctic coasts, the baseline is borrowed from the ring of cells at the same latitude (Step 3). Those cells hold 27% of the world's land area and 11% of today's population. Recomputing the August 2026 shares using only cells with their own baseline moves the land figure from 77% to 74% and the population figure from 73% to 72%. For the 10-year average the land figure moves from 60% to 63%. The headline numbers are not sensitive to it, but the map in those regions is a pattern with an uncertain level.
 
+**Early data is thin, and much of it is filled in.** In the 1880s, ships measured only a small part of the ocean, and stations covered only parts of the land. NASA's ocean source (ERSST) fills the gaps with statistical estimates based on patterns from better-measured decades. These are not climate model runs. Those estimates carry wider error bars, and NASA's published uncertainty for the global average is several times larger in the 1880s than in recent decades. The 1951-1980 view (Step 9) is there for readers who would rather lean on better-measured years.
+
 **The grid is coarse.** Two degrees is about 220 km at the equator, and NASA's 1,200 km smoothing spreads each station's influence further. The globe cannot show a city, a mountain range, or the local climate of a stretch of coast. Within about 800 km of the South Pole, NASA's grid carries a single value from the one station there, which is why the pole shows as a flat disk.
 
 **Population is today's.** See Step 5. The population share for 1900 is about where people live now, not then.
@@ -190,7 +201,7 @@ We would rather tell you the edges of this than have you find them.
 
 ::: spacer
 
-The code, the build steps, and the published files are at [github.com/Data4ThePeople/ClimateGlobe](https://github.com/Data4ThePeople/ClimateGlobe). You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the eight steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.
+The code, the build steps, and the published files are at [github.com/Data4ThePeople/ClimateGlobe](https://github.com/Data4ThePeople/ClimateGlobe). You need NASA's GISTEMP grid file, the GHS-POP 2025 population grid, the three Natural Earth files, and Python. The transformations are the nine steps above; the statistics are averages and weighted sums. If you do it and get something different from us, we want to know. Tell us, and we will look.
 
 ::: divider
 
@@ -217,6 +228,22 @@ Because NASA's record begins in 1880. For the globe as a whole the two periods a
 ### Why are some areas gray?
 
 NASA reports no value there for that month. In early years that is most of the Southern Hemisphere and the polar regions. In recent months it is sea ice and a handful of cells where station reports arrived late.
+
+### Is the early data measured or modeled?
+
+Both. Where ships and stations took readings, the values come from those readings. Where they did not, NASA fills the gap with statistical estimates built from temperature patterns in better-measured decades. These are not climate model runs. The filled-in share is largest in the 1880s and 1890s, especially over the oceans, and the error bars are wider then.
+
+### Don't the corrections to old ocean readings add warming?
+
+The main correction does the opposite. Before about 1940, most sea temperatures were taken by hauling up water in a bucket, and the water cooled as it evaporated on deck. Correcting for that raises the early readings, which makes the total warming since 1880 smaller, not larger.
+
+### What changes with the 1951-1980 baseline?
+
+The numbers go down, because 1951-1980 was already warmer than 1880-1900. The places that warmed most stay largely the same. That view starts in 1951, so it uses none of the thinner early data. For August 2026 it shows 1.42°C of warming, compared with 1.60°C against 1880-1900.
+
+### How does this compare with satellite records?
+
+Satellites have measured the air a few miles above the surface since 1979. From January 1979 through August 2026, the University of Alabama in Huntsville (UAH) satellite record warmed about 0.16°C per decade, and NASA's surface record about 0.21°C per decade. They measure different things, but both show warming, and both show it faster since 2004.
 
 ### Why does a single month look so different from the 10-year average?
 
