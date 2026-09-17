@@ -3,10 +3,10 @@
 Outputs in data/work/:
   meta.json          lat/lon axes, years per month, constants
   frames_mMM.npy     uint8 [n_years, 90, 180] quantized anomaly vs 1880-1900, 0 = missing
-  frames_nasa_mMM.npy  the same for NASA's own 1951-1980 anomaly
+  frames_nasa_mMM.npy  NASA's own 1951-1980 anomaly, from NASA_START (1951) on
   stats.json         per month, per year: global mean, % land > 1.5, % pop > 1.5, coverage,
                      for the single-month and the 10-year trailing variants; keys ending
-                     in _nasa use the 1951-1980 baseline
+                     in _nasa use the 1951-1980 baseline and start at NASA_START
   landfrac.npy       float32 [90, 180] land fraction of each cell
   pop.npy            float64 [90, 180] 2025 population of each cell
   fallback.npy       bool [12, 90, 180] cells whose baseline came from the zonal mean
@@ -171,7 +171,8 @@ def main():
 
     meta = {"lat": lat.tolist(), "lon": lon.tolist(), "threshold": C.THRESHOLD,
             "baseline": [C.BASELINE_START, C.BASELINE_END], "trailing": C.TRAILING_YEARS,
-            "q_scale": C.Q_SCALE, "q_offset": C.Q_OFFSET, "years": {}, "fallback_cells": {}}
+            "q_scale": C.Q_SCALE, "q_offset": C.Q_OFFSET, "years": {}, "fallback_cells": {},
+            "nasa_start": C.NASA_START}
     meta["offset"] = {}
     stats = {}
     for m in range(1, 13):
@@ -185,9 +186,10 @@ def main():
         # how much warmer 1951-1980 was than 1880-1900, area-weighted (the base is negative)
         meta["offset"][str(m)] = round(-float(np.nansum(b * area) / area[~np.isnan(b)].sum()), 3)
         np.save(C.WORK / f"frames_m{m:02d}.npy", quantize(pre))
-        np.save(C.WORK / f"frames_nasa_m{m:02d}.npy", quantize(raw))
+        late = yrs >= C.NASA_START                    # the NASA view uses no years before its baseline
+        np.save(C.WORK / f"frames_nasa_m{m:02d}.npy", quantize(raw[late]))
         stats[str(m)] = {}
-        for suffix, grid in (("", pre), ("_nasa", raw)):
+        for suffix, grid in (("", pre), ("_nasa", raw[late])):
             single, trailing = series_stats(grid, area, landfrac, pop)
             stats[str(m)]["single" + suffix] = single
             stats[str(m)]["trailing" + suffix] = trailing
@@ -211,9 +213,12 @@ def main():
         raw = anom[sel[i]]
         s = stats[str(m)]["single"][i]
         raw_mean = float(np.nansum(raw * area) / area[~np.isnan(raw)].sum())
-        sn = stats[str(m)]["single_nasa"][i]
-        assert abs(sn["mean"] - raw_mean) < 1e-9, "NASA-baseline mean must equal the raw grid mean"
-        print(f"{y:>8} {raw_mean:>+10.3f} {s['mean']:>+12.3f} {100*s['land']:>9.1f}% {100*s['pop']:>8.1f}% {100*s['cov_land']:>8.1f}% {100*s['cov_pop']:>7.1f}% {100*sn['land']:>9.1f}% {100*sn['pop']:>8.1f}%")
+        nasa_cols = f"{'n/a':>10} {'n/a':>9}"
+        if y >= C.NASA_START:
+            sn = stats[str(m)]["single_nasa"][y - C.NASA_START]
+            assert abs(sn["mean"] - raw_mean) < 1e-9, "NASA-baseline mean must equal the raw grid mean"
+            nasa_cols = f"{100*sn['land']:>9.1f}% {100*sn['pop']:>8.1f}%"
+        print(f"{y:>8} {raw_mean:>+10.3f} {s['mean']:>+12.3f} {100*s['land']:>9.1f}% {100*s['pop']:>8.1f}% {100*s['cov_land']:>8.1f}% {100*s['cov_pop']:>7.1f}% {nasa_cols}")
     print("NASA GLB.Ts+dSST table, Aug 2026 vs 1951-1980: +1.40")
     # independent brute-force recomputation for Aug 2026
     i = int(np.where(yrs == 2026)[0][0])
@@ -230,7 +235,9 @@ def main():
     print(f"brute-force Aug 2026: %land>1.5 = {100*num_l/den_l:.2f}%   %pop>1.5 = {100*num_p/den_p:.2f}%")
     t = stats[str(m)]["trailing"][i]
     print(f"10-yr trailing Aug 2017-2026: mean {t['mean']:+.3f}  %land>1.5 {100*t['land']:.1f}%  %pop>1.5 {100*t['pop']:.1f}%")
-    t = stats[str(m)]["trailing_nasa"][i]
+    t = stats[str(m)]["trailing_nasa"][2026 - C.NASA_START]
+    first = next(k for k, v in enumerate(stats[str(m)]["trailing_nasa"]) if v)
+    print(f"first NASA-view 10-year average: {C.NASA_START + first}")
     print(f"  same, NASA 1951-1980 baseline: mean {t['mean']:+.3f}  %land>1.5 {100*t['land']:.1f}%  %pop>1.5 {100*t['pop']:.1f}%")
     print("1951-1980 minus 1880-1900 by month:", meta["offset"])
 

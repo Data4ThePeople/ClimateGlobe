@@ -22,6 +22,8 @@ def pack_month(m, meta, prefix="frames"):
     """Binary layout: magic, u16 n_years, u16 first_year, u16 H, u16 W, then u8 frames."""
     frames = np.load(C.WORK / f"{prefix}_m{m:02d}.npy")
     years = meta["years"][str(m)]
+    if prefix == "frames_nasa":
+        years = [y for y in years if y >= meta["nasa_start"]]
     n, H, W = frames.shape
     assert years == list(range(years[0], years[0] + n)), "years must be contiguous"
     head = MAGIC + struct.pack("<HHHH", n, years[0], H, W)
@@ -74,7 +76,7 @@ def build():
 
     last = meta["years"][str(C.DEFAULT_MONTH)][-1]
     payload = {
-        "meta": {k: meta[k] for k in ("threshold", "baseline", "trailing", "q_scale", "q_offset", "years", "fallback_cells", "offset")},
+        "meta": {k: meta[k] for k in ("threshold", "baseline", "trailing", "q_scale", "q_offset", "years", "fallback_cells", "offset", "nasa_start")},
         "stats": stats,
         "geo": geo_lines(),
         "months": C.MONTH_NAMES,
