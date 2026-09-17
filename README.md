@@ -17,7 +17,8 @@ Live: https://data4thepeople.github.io/ClimateGlobe/dist/index.html
   latitude band (about 27% of cells, mostly ocean and polar).
 - **NASA baseline option:** the "NASA's 1951-1980 baseline" checkbox shows the
   GISTEMP anomalies as published, with no rebasing and no latitude-band
-  fill-in. Added September 17, 2026 after a reader pointed out how thin
+  fill-in. That view starts in 1951, the first year of NASA's baseline, and
+  uses no earlier data (first 10-year average: 1957). Added September 17, 2026 after a reader pointed out how thin
   1880-1900 coverage is, especially at sea. The 1.5°C line stays at 1.5°C, so
   in this view it is a higher bar (1951-1980 was 0.16 to 0.32°C warmer than
   1880-1900, depending on the month). The hot spots are the same in both views.

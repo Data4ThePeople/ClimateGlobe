@@ -35,6 +35,7 @@ NE_LAYERS = {
 # Analysis constants.
 BASELINE_START, BASELINE_END = 1880, 1900   # preindustrial proxy (NASA's record starts 1880)
 BASELINE_MIN_YEARS = 10                     # cells with fewer baseline years use the zonal mean
+NASA_START = 1951                           # NASA-baseline view starts with its baseline period
 THRESHOLD = 1.5                             # degrees C above baseline
 TRAILING_YEARS = 10                         # "10-year average" toggle
 TRAILING_MIN_YEARS = 7

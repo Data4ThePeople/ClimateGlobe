@@ -129,7 +129,11 @@
       if (h.get("square") === "1") document.documentElement.classList.add("square");
     }
   })();
-  const yearsOf = (m) => META.years[String(m)];
+  // the NASA view starts with its own baseline period, so it uses no earlier years
+  const yearsOf = (m) => {
+    const all = META.years[String(m)];
+    return state.base === "nasa" ? all.filter((y) => y >= META.nasa_start) : all;
+  };
   const idxOf = (m, y) => y - yearsOf(m)[0];
   const baseLabel = () => state.base === "nasa" ? "1951-1980" : "1880-1900";
 
@@ -433,7 +437,7 @@ void main() {
   function setYearBounds() {
     const yrs = yearsOf(state.month);
     yearIn.min = yrs[0]; yearIn.max = yrs[yrs.length - 1];
-    if (state.year > yrs[yrs.length - 1]) state.year = yrs[yrs.length - 1];
+    state.year = Math.min(yrs[yrs.length - 1], Math.max(yrs[0], state.year));
     yearIn.value = state.year;
   }
   async function show() {
