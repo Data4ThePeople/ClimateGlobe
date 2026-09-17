@@ -63,7 +63,8 @@
   }
 
   // ---------------------------------------------------------------- data
-  const frames = {};             // month -> {n, first, data}
+  const frames = {};             // "pre-8" / "nasa-8" -> {n, first, data}
+  const fkey = (base, m) => `${base}-${m}`;
   function parseMonth(buf) {
     const dv = new DataView(buf);
     if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== "CGM1") throw new Error("bad month file");
@@ -83,25 +84,28 @@
     return out;
   }
   const pending = {};
-  function loadMonth(m) {
-    if (frames[m]) return Promise.resolve(frames[m]);
-    if (pending[m]) return pending[m];
+  function loadMonth(m, base) {
+    const k = fkey(base, m);
+    if (frames[k]) return Promise.resolve(frames[k]);
+    if (pending[k]) return pending[k];
     let p;
-    if (P.inline && P.inline.month === m) {
+    if (base === "pre" && P.inline && P.inline.month === m) {
       p = inflate(b64bytes(P.inline.b64));
     } else {
-      p = fetch(`data/m${String(m).padStart(2, "0")}.gz`, { cache: "force-cache" })
+      const dir = base === "nasa" ? "data/nasa" : "data";
+      p = fetch(`${dir}/m${String(m).padStart(2, "0")}.gz`, { cache: "force-cache" })
         .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.arrayBuffer(); })
         .then((b) => inflate(new Uint8Array(b)));
     }
-    pending[m] = p.then((buf) => { frames[m] = parseMonth(buf); delete pending[m]; return frames[m]; });
-    return pending[m];
+    pending[k] = p.then((buf) => { frames[k] = parseMonth(buf); delete pending[k]; return frames[k]; });
+    return pending[k];
   }
 
   // ---------------------------------------------------------------- state
-  const state = { month: P.defaultMonth, year: P.latestYear, hot: false, avg: false,
+  // base: "pre" compares with each cell's 1880-1900 average, "nasa" uses NASA's own 1951-1980 anomaly
+  const state = { month: P.defaultMonth, year: P.latestYear, hot: false, avg: false, base: "pre",
                   lon0: -30, lat0: 20, playing: false, spun: false };
-  // Deep links: #month=3&year=1998&hot=1&avg=1 (alongside embed= and theme=).
+  // Deep links: #month=3&year=1998&hot=1&avg=1&base=nasa (alongside embed= and theme=).
   (() => {
     const h = new URLSearchParams(location.hash.slice(1));
     const m = +h.get("month"), y = +h.get("year");
@@ -110,6 +114,7 @@
     if (y >= yrs[0] && y <= yrs[yrs.length - 1]) state.year = y;
     state.hot = h.get("hot") === "1";
     state.avg = h.get("avg") === "1";
+    if (h.get("base") === "nasa") state.base = "nasa";
     // #hero=1: fixed 1680x1080 dark card for the post's hero image. No idle spin, fixed angle.
     if (h.get("hero") === "1") {
       document.documentElement.classList.add("hero");
@@ -126,10 +131,11 @@
   })();
   const yearsOf = (m) => META.years[String(m)];
   const idxOf = (m, y) => y - yearsOf(m)[0];
+  const baseLabel = () => state.base === "nasa" ? "1951-1980" : "1880-1900";
 
   const view = new Uint8Array(HW);  // what is on the globe right now (quantized)
   function computeView() {
-    const f = frames[state.month];
+    const f = frames[fkey(state.base, state.month)];
     const i = state.year - f.first;
     if (i < 0 || i >= f.n) { view.fill(0); return; }
     if (!state.avg) { view.set(f.data.subarray(i * HW, (i + 1) * HW)); return; }
@@ -309,8 +315,9 @@ void main() {
   // ---------------------------------------------------------------- readouts
   const fmtPct = (v) => v == null || Number.isNaN(v) ? "n/a" : `${(100 * v).toFixed(v < 0.1 ? 1 : 0)}%`;
   const fmtDeg = (v) => v == null ? "n/a" : `${v >= 0 ? "+" : "−"}${Math.abs(v).toFixed(2)}°C`;
+  const seriesKey = () => (state.avg ? "trailing" : "single") + (state.base === "nasa" ? "_nasa" : "");
   function statsFor() {
-    const s = STATS[String(state.month)][state.avg ? "trailing" : "single"];
+    const s = STATS[String(state.month)][seriesKey()];
     return s[idxOf(state.month, state.year)] || null;
   }
   function updateReadouts() {
@@ -319,6 +326,11 @@ void main() {
       ? `${mname} ${Math.max(yearsOf(state.month)[0], state.year - META.trailing + 1)}–${state.year}, averaged`
       : `${mname} ${state.year}`;
     $("#yearlabel").textContent = state.year;
+    const bl = baseLabel(), nasa = state.base === "nasa";
+    $("#title").textContent = `How much warmer than ${bl}?`;
+    $("#gmeancap").textContent = `global average, vs. ${bl}`;
+    for (const el of document.querySelectorAll(".vs")) el.textContent = nasa ? ", vs. 1951-1980" : "";
+    canvas.setAttribute("aria-label", `Spinning globe colored by temperature anomaly versus ${bl}`);
     const s = statsFor();
     $("#gmean").textContent = s ? fmtDeg(s.mean) : "n/a";
     $("#landpct").textContent = s ? fmtPct(s.land) : "n/a";
@@ -327,7 +339,11 @@ void main() {
     if (!s) note = state.avg ? "Not enough years yet for a 10-year average." : "No data for this month.";
     else if (s.cov_land < 0.995 || s.cov_pop < 0.995) note = `Data cover ${fmtPct(s.cov_land)} of land and ${fmtPct(s.cov_pop)} of today's population this month.`;
     $("#covnote").textContent = note;
-    $("#charttitle").textContent = `Share above 1.5°C, every ${mname} since ${yearsOf(state.month)[0]}${state.avg ? " (10-year average)" : ""}`;
+    const bn = $("#basenote");
+    bn.hidden = !nasa;
+    document.documentElement.classList.toggle("base-nasa", nasa);
+    if (nasa) bn.textContent = `1951-1980 has more measurements. ${mname} then was already ${META.offset[String(state.month)].toFixed(2)}°C warmer than in 1880-1900, so 1.5°C above it is a higher bar.`;
+    $("#charttitle").textContent = `Share above 1.5°C${nasa ? " vs. 1951-1980" : ""}, every ${mname} since ${yearsOf(state.month)[0]}${state.avg ? " (10-year average)" : ""}`;
   }
   function drawLegend() {
     const c = $("#legend"), dpr = window.devicePixelRatio || 1;
@@ -360,7 +376,7 @@ void main() {
     const cw = box.width, ch = box.height;
     const padL = 30, padR = 6, padT = 6, padB = 18;
     const yrs = yearsOf(state.month);
-    const rows = STATS[String(state.month)][state.avg ? "trailing" : "single"];
+    const rows = STATS[String(state.month)][seriesKey()];
     const x = (y) => padL + (y - yrs[0]) / (yrs[yrs.length - 1] - yrs[0]) * (cw - padL - padR);
     const yy = (v) => padT + (1 - v) * (ch - padT - padB);
     ctx.font = "10px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
@@ -400,6 +416,7 @@ void main() {
   function render() { raf = 0; draw(); }
   const request = () => { if (!raf) raf = requestAnimationFrame(render); };
   function refresh() {
+    if (!frames[fkey(state.base, state.month)]) return;   // still loading; show() refreshes when it lands
     computeView(); uploadView(); updateReadouts(); drawChart(); request();
   }
 
@@ -412,28 +429,31 @@ void main() {
   yearIn.value = state.year;
   $("#hot").checked = state.hot;
   $("#avg").checked = state.avg;
+  $("#nasa").checked = state.base === "nasa";
   function setYearBounds() {
     const yrs = yearsOf(state.month);
     yearIn.min = yrs[0]; yearIn.max = yrs[yrs.length - 1];
     if (state.year > yrs[yrs.length - 1]) state.year = yrs[yrs.length - 1];
     yearIn.value = state.year;
   }
-  async function setMonth(m) {
-    state.month = m;
+  async function show() {
+    const m = state.month, base = state.base;
     setYearBounds();
-    if (!frames[m]) {
+    if (!frames[fkey(base, m)]) {
       $("#loading").textContent = `Loading ${P.months[m - 1]}…`; $("#loading").hidden = false;
-      try { await loadMonth(m); }
+      try { await loadMonth(m, base); }
       catch (e) { $("#loading").textContent = `Could not load ${P.months[m - 1]} (${e.message}).`; return; }
       $("#loading").hidden = true;
-      if (state.month !== m) return;
+      if (state.month !== m || state.base !== base) return;
     }
     refresh();
   }
+  const setMonth = (m) => { state.month = m; return show(); };
   monthSel.addEventListener("change", () => setMonth(+monthSel.value));
   yearIn.addEventListener("input", () => { state.year = +yearIn.value; refresh(); });
   $("#hot").addEventListener("change", (e) => { state.hot = e.target.checked; uploadLut(); drawLegend(); request(); });
   $("#avg").addEventListener("change", (e) => { state.avg = e.target.checked; refresh(); });
+  $("#nasa").addEventListener("change", (e) => { state.base = e.target.checked ? "nasa" : "pre"; show(); });
 
   let timer = 0;
   function stop() { state.playing = false; playBtn.textContent = "▶"; playBtn.setAttribute("aria-pressed", "false"); clearInterval(timer); timer = 0; }
@@ -521,7 +541,7 @@ void main() {
     if (!ll) { hideTip(); return; }
     const v = cellValue(ll[0], ll[1]);
     const ns = ll[0] >= 0 ? "N" : "S", ew = ll[1] >= 0 ? "E" : "W";
-    tip.innerHTML = `<div class="big">${v == null ? "No data" : fmtDeg(v)}</div><div>${Math.abs(ll[0]).toFixed(0)}°${ns}, ${Math.abs(ll[1]).toFixed(0)}°${ew} · vs. 1880-1900</div>`;
+    tip.innerHTML = `<div class="big">${v == null ? "No data" : fmtDeg(v)}</div><div>${Math.abs(ll[0]).toFixed(0)}°${ns}, ${Math.abs(ll[1]).toFixed(0)}°${ew} · vs. ${baseLabel()}</div>`;
     tip.style.display = "block";
     const tw = tip.offsetWidth, th = tip.offsetHeight;
     let x = e.clientX + 14, y = e.clientY + 14;
@@ -549,7 +569,7 @@ void main() {
   drawLegend();
   setYearBounds();
   $("#loading").textContent = "Loading…"; $("#loading").hidden = false;
-  loadMonth(state.month).then(() => {
+  loadMonth(state.month, state.base).then(() => {
     $("#loading").hidden = true;
     refresh();
     idleSpin();

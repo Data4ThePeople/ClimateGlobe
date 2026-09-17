@@ -15,6 +15,12 @@ Live: https://data4thepeople.github.io/ClimateGlobe/dist/index.html
   NASA's record starts in 1880, so 1880-1900 stands in for the IPCC's
   1850-1900. Cells with fewer than ten baseline years take the mean of their
   latitude band (about 27% of cells, mostly ocean and polar).
+- **NASA baseline option:** the "NASA's 1951-1980 baseline" checkbox shows the
+  GISTEMP anomalies as published, with no rebasing and no latitude-band
+  fill-in. Added September 17, 2026 after a reader pointed out how thin
+  1880-1900 coverage is, especially at sea. The 1.5°C line stays at 1.5°C, so
+  in this view it is a higher bar (1951-1980 was 0.16 to 0.32°C warmer than
+  1880-1900, depending on the month). The hot spots are the same in both views.
 - **Population:** GHS-POP 2025, 30 arc-second WGS84 mosaic, EU Joint Research
   Centre. Summed into the 2° cells and held fixed for every year.
 - **Land fraction:** Natural Earth 110m land polygons rasterized at 0.1°.
@@ -43,12 +49,15 @@ cd dist && python3 -m http.server 8765     # http://localhost:8765/index.html
 `dist/index.html` is one file with the CSS, JS, coastlines and the August
 frames inlined, so it opens from disk. The other eleven months live in
 `dist/data/m01.gz` .. `m12.gz` (about 0.9 MB each) and are fetched relative to
-the page the first time that month is selected. All of `dist/` is tracked and
+the page the first time that month is selected. The NASA-baseline frames live
+in `dist/data/nasa/m01.gz` .. `m12.gz` and load only when that view is on.
+The build rewrites a `.gz` only when its contents change. All of `dist/` is tracked and
 served by GitHub Pages from `main` at the repo root; `.nojekyll` keeps Pages
 from ignoring the data folder.
 
-Deep links: `#month=3&year=1998&hot=1&avg=1` (month 1-12, `hot` highlights
-only areas above 1.5°C, `avg` shows the 10-year average). `#theme=light|dark`
+Deep links: `#month=3&year=1998&hot=1&avg=1&base=nasa` (month 1-12, `hot`
+highlights only areas above 1.5°C, `avg` shows the 10-year average, `base=nasa`
+uses NASA's 1951-1980 baseline). `#theme=light|dark`
 pins the theme; `#embed=1` forces the compact framed layout.
 
 ## Embedding it in Prismic

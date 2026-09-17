@@ -191,12 +191,18 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
 .embed .wrap { padding: 8px 10px 8px; max-width: none; }
 .embed .controls { padding: 8px 10px; margin-bottom: 10px; gap: 6px 12px; }
 .embed .footnote { display: none; }
+@container page (max-width: 860px) {
+  /* month and speed share a row so the 780px frame does not scroll */
+  .embed .controls { grid-auto-flow: dense; }
+  .embed .stat .cap .vs { display: none; }
+}
 .embed .footer-row { margin-top: 8px; justify-content: flex-end; }
 .embed .footer-brand .brand { height: 26px; }
 .embed .main { gap: 18px; grid-template-columns: minmax(260px, 540px) minmax(260px, 1fr); }
 .embed .when { font-size: 19px; }
 .embed .stat .num { font-size: 26px; }
 .embed #chart { height: 170px; }
+.embed.base-nasa #chart { height: 130px; }   /* room for the baseline note */
 
 /* Phone width inside the 780px frame: globe and headline stats side by side,
    legend and chart full width underneath, so nothing scrolls inside the iframe.
@@ -217,6 +223,7 @@ header.masthead p { margin: 0; color: var(--text-secondary); font-size: 13.5px; 
   .embed .stat2 { grid-template-columns: 1fr; gap: 6px; }
   .embed .note { font-size: 10.5px; }
   .embed #chart { height: 120px; }
+  .embed.base-nasa #chart { height: 86px; }
   .embed .footer-row { margin-top: 4px; }
 }
 
