@@ -32,3 +32,9 @@ As of NASA's September 2026 release, August 2026 was 1.60°C warmer than the Aug
 The chart shows the world as a whole. The globe shows where you live. Pick your month, press play, and watch your own part of the world change. The tool is free to use and free to embed.
 
 https://www.data4thepeople.com/p/climate-globe
+
+## LinkedIn reply to Guy Warren (September 17, 2026)
+
+Reply to his comment on the 1880-1900 data. Edits 1, 2 and 3 accepted.
+
+Guy Warren Thank you for this comment! This is exactly how I was hoping this process would work. I am a generalist, so my work will need this sort of feedback. Because 1880-1900 data is so thin, I updated the tool with a toggle to use NASA's 1951-1980 baseline instead: https://data4thepeople.github.io/ClimateGlobe/dist/index.html#base=nasa The numbers are lower, since 1951-1980 was already warmer, but the trend and hot spots are largely the same. Thanks for your critical eye!
