@@ -91,7 +91,7 @@ Every chart we publish should be something you can check, question, and rebuild 
 
 Three public datasets go into the globe. We do not alter any of the underlying figures. Our work is moving the baseline, adding up land and people, and drawing the globe.
 
-**Temperature: NASA GISTEMP v4.** The NASA Goddard Institute for Space Studies publishes the GISS Surface Temperature Analysis, a monthly map of temperature change covering the world since January 1880. NASA divides the world into cells 2° of latitude by 2° of longitude, about 220 km on a side at the equator. Each cell's value blends every weather station within 1,200 km with ship and buoy readings of sea surface temperature. (NASA's names for those two inputs are GHCN v4 and ERSST v5.) Each cell holds one value per month: how far that month's temperature departed from that cell's normal for the same calendar month. NASA measures "normal" from 1951-1980; we move it back to 1880-1900 in Step 2. The one exception is the optional NASA baseline view (Step 9), which keeps 1951-1980. The file is free, needs no login, and is updated around the middle of each month with the prior month's data.
+**Temperature: NASA GISTEMP v4.** The NASA Goddard Institute for Space Studies publishes the GISS Surface Temperature Analysis, a monthly map of temperature change covering the world since January 1880. NASA divides the world into cells 2° of latitude by 2° of longitude, about 220 km on a side at the equator. Each cell's value blends every weather station within 1,200 km with sea surface readings from ships and buoys. (NASA's names for those two inputs are GHCN v4 and ERSST v5.) Where there were no readings, the ocean input fills the gap by statistical estimate, which is why the map looks nearly complete even in the 1880s. Step 0 below explains that. Each cell holds one value per month: how far that month's temperature departed from that cell's normal for the same calendar month. NASA measures "normal" from 1951-1980; we move it back to 1880-1900 in Step 2. The one exception is the optional NASA baseline view (Step 9), which keeps 1951-1980. The file is free, needs no login, and is updated around the middle of each month with the prior month's data.
 
 **Population: GHS-POP 2025.** The European Commission's Joint Research Centre publishes the Global Human Settlement Layer, a population grid built from census data and satellite imagery. We use the 2025 estimate, which counts people in squares about one kilometer on a side. It sums to 8.19 billion people.
 
@@ -100,6 +100,24 @@ Three public datasets go into the globe. We do not alter any of the underlying f
 ## How we built it
 
 ::: spacer
+
+### Step 0: What NASA does before we get the file
+
+We start from NASA's finished map, so its limits are our limits. This step is NASA's work, not ours, and it is the part most worth understanding.
+
+NASA builds each monthly map from two inputs: land weather stations (GHCN v4) and sea surface temperature (ERSST v5). Both were thin in the early years.
+
+On land, 674 stations reported a value for August 1880, against 9,900 for August 2025. NASA spreads each station's reading up to 1,200 km. Even so, 32% of the world's land area sat farther than 1,200 km from any reporting station in August 1885, and the typical land cell was 979 km from the nearest one. Today it is 158 km. The Southern Hemisphere is the thinnest part: 45 stations reported in August 1880, and 39 of them were in Australia and New Zealand.
+
+At sea, ships reported from about 24% of ocean cells in a typical month between 1880 and 1900. The Southern Ocean had none at all. The tropical Pacific, a quarter of the world's ocean, had about 13%. For the rest, NASA's ocean input estimates a value. It does this by taking the well-measured satellite years of 1982 through 2011, pulling out 140 recurring patterns in how sea temperature varies, and finding the mix of those patterns that best fits the few readings a given old month does have. That mix is then applied across the whole ocean. It is pattern-matching from better-measured years, not a climate model.
+
+Put together, about 42% of the planet's surface had a direct reading in a typical month of the 1880s. NASA's published map carries values for about 86% of it. The rest is estimated. By the 1950s about 74% of the surface was directly measured, and today it is about 85%.
+
+This is why NASA's own error bars are wider early. For the global average, NASA puts the 95% range at about 0.11°C in the 1880s and about 0.04°C in recent decades. Other groups using different methods land between 1.20°C and 1.37°C of warming from the 1880s to the last decade, a spread of about 0.16°C.
+
+We take NASA's file as published and do not try to undo any of this. What we do about it: the globe leaves a cell gray when NASA reports no value, the coverage note tells you how much of the land and population had a value that month, and the 1951-1980 view in Step 9 offers a period with much better measurement. Readers should know that a colored cell in 1885 can still be an estimate.
+
+Station counts and distances here are ours, computed from NOAA's GHCN-M v4 file. Ocean coverage is ours, computed from the ICOADS 2-degree monthly summaries published by NOAA. The share of the planet directly measured comes from the Met Office's HadCRUT5 non-infilled grid. The error bars are NASA's own, from its 2024 uncertainty ensemble.
 
 ### Step 1: Start with what NASA already gives you
 
@@ -183,7 +201,7 @@ We would rather tell you the edges of this than have you find them.
 
 **Borrowed baselines cover a quarter of the land and a tenth of the people.** For Antarctica, the tropical interiors, the deserts of western China, and the Arctic coasts, the baseline is borrowed from the ring of cells at the same latitude (Step 3). Those cells hold 27% of the world's land area and 11% of today's population. Recomputing the August 2026 shares using only cells with their own baseline moves the land figure from 77% to 74% and the population figure from 73% to 72%. For the 10-year average the land figure moves from 60% to 63%. The headline numbers are not sensitive to it, but the map in those regions is a pattern with an uncertain level.
 
-**Early data is thin, and much of it is filled in.** In the 1880s, ships measured only a small part of the ocean, and stations covered only parts of the land. NASA's ocean source (ERSST) fills the gaps with statistical estimates based on patterns from better-measured decades. These are not climate model runs. Those estimates carry wider error bars, and NASA's published uncertainty for the global average is several times larger in the 1880s than in recent decades. The 1951-1980 view (Step 9) is there for readers who would rather lean on better-measured years.
+**Early data is thin, and much of it is filled in.** In the 1880s, ships measured only a small part of the ocean, and stations covered only parts of the land. NASA's ocean source (ERSST) fills the gaps with statistical estimates based on patterns from better-measured decades. These are not climate model runs. About 42% of the planet had a direct reading in a typical month of the 1880s, against about 85% today, and NASA's published map carries values for about 86% of the surface in those early years. NASA puts the 95% range on the global average at about 0.11°C in the 1880s and about 0.04°C in recent decades. Step 0 has the detail. Worth knowing: the widest error bars in the record are not the 1880s but 1941 through 1945, when wartime changed how ships measured. The 1951-1980 view (Step 9) is there for readers who would rather lean on better-measured years.
 
 **The grid is coarse.** Two degrees is about 220 km at the equator, and NASA's 1,200 km smoothing spreads each station's influence further. The globe cannot show a city, a mountain range, or the local climate of a stretch of coast. Within about 800 km of the South Pole, NASA's grid carries a single value from the one station there, which is why the pole shows as a flat disk.
 
@@ -235,7 +253,13 @@ Both. Where ships and stations took readings, the values come from those reading
 
 ### Don't the corrections to old ocean readings add warming?
 
-The main correction does the opposite. Before about 1940, most sea temperatures were taken by hauling up water in a bucket, and the water cooled as it evaporated on deck. Correcting for that raises the early readings, which makes the total warming since 1880 smaller, not larger.
+The largest one does the opposite. Before about 1940, most sea temperatures were taken by hauling up water in a bucket, and the water cooled as it evaporated on deck. Correcting for that raises the early readings, which lowers the measured warming. In the Met Office's ocean record, the adjusted series warms by 0.73°C per century since 1880 and the unadjusted series by 0.93°C.
+
+Land corrections go the other way. Adjusting for station moves and equipment changes adds about 0.16°C per century (Chan and others, 2024). The ocean is far larger, so the two together still lower the measured warming, by our arithmetic. We have not found a published figure for the combined effect, so we are not putting a number on it.
+
+### How much of the map is measured and how much is filled in?
+
+In a typical month of the 1880s, about 42% of the planet's surface had a direct reading, and NASA's map carries values for about 86% of it. The difference is filled in, most of it ocean. Today about 85% of the surface is directly measured. Gray on the globe means NASA reports nothing at all, so gray marks where even the estimate stops, not where the measurements stop.
 
 ### What changes with the 1951-1980 baseline?
 
